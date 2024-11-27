@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import Wrapper from "../Wrapper";
+import Logo from "./Logo";
 
 export default function MainHeader() {
   const [isVisible, setIsVisible] = useState<boolean>(true);
@@ -21,12 +22,12 @@ export default function MainHeader() {
 
   return (
     <header
-      className={`w-full fixed flex justify-center h-16 bg-primary-500 dark:bg-primary-800 transition-transform duration-300 ${
+      className={`w-full fixed flex justify-center h-20 bg-primary-500 dark:bg-primary-800 transition-transform duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <Wrapper className="flex justify-between items-center">
-        <span className="hover:text-primary-200">Logo</span> <nav></nav> Profile
+        <Logo /> <nav></nav> Profile
       </Wrapper>
     </header>
   );
