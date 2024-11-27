@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import MainHeader from "@/components/header/MainHeader";
+import Wrapper from "@/components/Wrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,9 +28,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-transparent h-dvh `}
       >
-        {children}
+        <div className=" grid grid-rows-[1fr_auto] h-full">
+          <MainHeader />
+          <main className="pt-20  bg-primary-50 dark:bg-primary-950">
+            <Wrapper>{children}</Wrapper>
+          </main>
+          <footer className="bg-primary-500 dark:bg-primary-800 text-primary-100 p-4">
+            <div className="container mx-auto text-center">
+              <p>
+                &copy; {new Date().getFullYear()} NextShonen by Yelyzaveta
+                Vlasenko. All rights reserved.
+              </p>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );
