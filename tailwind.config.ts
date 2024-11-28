@@ -37,6 +37,10 @@ export default {
           950: "#00191D",
         },
       },
+      fontFamily: {
+        sans: ["var(--font-nunito)", "sans-serif"],
+        serif: ["var(--font-kanit)", "serif"],
+      },
     },
   },
   plugins: [],
