@@ -1,7 +1,15 @@
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NextShōnen: Track, Discover, Share Anime & Manga",
+  description:
+    "Discover and track your favorite anime effortlessly with our sleek and modern platform. ",
+};
+
 export default function Home() {
   return (
-    <div className=" text-primary-700 dark:text-white">
-      <h2 className="text-lg font-semibold mb-2">Main page</h2>
+    <div className="text-primary-700 dark:text-white">
+      <h2 className="mb-2 text-lg font-semibold">Main page</h2>
       <p className="text-sm">
         You are not logged in so I&apos;ll show you this page...
       </p>

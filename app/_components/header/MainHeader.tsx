@@ -10,11 +10,11 @@ export default function MainHeader() {
 
   return (
     <header
-      className={`w-full fixed flex justify-center h-20 bg-primary-500 dark:bg-primary-800 transition-transform duration-300 ${
+      className={`fixed flex h-20 w-full justify-center bg-primary-500 transition-transform duration-300 dark:bg-primary-800 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <Wrapper className="flex justify-between items-center">
+      <Wrapper className="flex items-center justify-between">
         <Logo />
         <MainNav />
         <p>Profile</p>

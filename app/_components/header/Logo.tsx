@@ -7,7 +7,7 @@ export default function Logo() {
     <Link href="/">
       <div className="flex items-center">
         <Image src={logo} width={60} height={60} alt="NextShōnen logo" />
-        <span className="font-bold ml-2 text-xl">NextShōnen</span>
+        <span className="ml-2 text-lg font-bold">NextShōnen</span>
       </div>
     </Link>
   );
