@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import MainNav from "./MainNav";
 import useHeaderScroll from "../../_hooks/useHeaderScroll";
 
-export default function MainHeader() {
+export default function GuestHeader() {
   const isVisible = useHeaderScroll();
 
   return (

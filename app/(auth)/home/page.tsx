@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <div className=" text-primary-700 dark:text-white">
       <h2 className="text-lg font-semibold mb-2">Main page</h2>
-      <p className="text-sm">Coming soon...</p>
+      <p className="pb-1">You are logged in. Coming soon...</p>
       <p className="pb-1">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
         porttitor lectus ex, sit amet condimentum magna volutpat non. In
