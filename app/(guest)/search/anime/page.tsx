@@ -1,13 +1,16 @@
 import { fetchAnime } from "../../../_lib/graphql/fetchers/animeFetcher";
+import { SearchAnimeVariables } from "../../../_lib/graphql/types/anime";
 
 export default async function page() {
-  const variables = {
-    search: "Jujutsu",
+  const variables: SearchAnimeVariables = {
+    isAdult: false,
+    sort: ["TRENDING_DESC"],
     page: 1,
-    perPage: 3,
   };
 
-  const animeList = await fetchAnime(variables);
+  const data = await fetchAnime(variables);
+
+  const animeList = data.media;
 
   return (
     <div>
@@ -16,9 +19,9 @@ export default async function page() {
         {animeList.map((anime) => (
           <li key={anime.id}>
             <h2 className="text-primary-800">
-              {anime.title.english || anime.title.romaji}
+              {anime.title.userPreferred || anime.title.userPreferred}
             </h2>
-            <img src={anime.coverImage.large} alt={anime.title.romaji} />
+            <img src={anime.coverImage.large} alt={anime.title.userPreferred} />
           </li>
         ))}
       </ul>
