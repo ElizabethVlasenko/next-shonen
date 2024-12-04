@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const SEARCH_ANIME = gql`
   query (
     $page: Int = 1
+    $perPage: Int = 20
     $id: Int
     $type: MediaType
     $isAdult: Boolean
@@ -33,7 +34,7 @@ export const SEARCH_ANIME = gql`
     $minimumTagRank: Int
     $sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]
   ) {
-    Page(page: $page, perPage: 20) {
+    Page(page: $page, perPage: $perPage) {
       pageInfo {
         total
         perPage

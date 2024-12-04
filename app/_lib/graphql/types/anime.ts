@@ -39,9 +39,10 @@ export type MediaSeason = "WINTER" | "SPRING" | "SUMMER" | "FALL";
 export type MediaType = "ANIME" | "MANGA";
 
 export type SearchAnimeVariables = {
-  page: number;
+  page?: number;
+  perPage?: number;
   id?: number;
-  type?: string;
+  type?: MediaType;
   isAdult: boolean;
   search?: string;
   format?: MediaFormat[];
@@ -71,6 +72,61 @@ export type SearchAnimeVariables = {
   sort?: string[];
 };
 
+export type SearchResultAnimeMedia = {
+  id: number;
+  title: {
+    userPreferred: string;
+  };
+  coverImage: {
+    extraLarge: string;
+    large: string;
+    color: string;
+  };
+  startDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  endDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  bannerImage: string;
+  season: string;
+  seasonYear: number;
+  description: string;
+  type: MediaType;
+  format: MediaFormat;
+  status: MediaStatus;
+  episodes: number;
+  duration: number;
+  chapters: number;
+  volumes: number;
+  genres: string[];
+  isAdult: boolean;
+  averageScore: number;
+  popularity: number;
+  nextAiringEpisode: {
+    airingAt: number;
+    timeUntilAiring: number;
+    episode: number;
+  };
+  mediaListEntry: {
+    id: number;
+    status: MediaStatus;
+  };
+  studios: {
+    edges: {
+      isMain: boolean;
+      node: {
+        id: number;
+        name: string;
+      };
+    }[];
+  };
+};
+
 export type SearchResultAnime = {
   pageInfo: {
     total: number;
@@ -79,58 +135,5 @@ export type SearchResultAnime = {
     lastPage: number;
     hasNextPage: boolean;
   };
-  media: {
-    id: number;
-    title: {
-      userPreferred: string;
-    };
-    coverImage: {
-      extraLarge: string;
-      large: string;
-      color: string;
-    };
-    startDate: {
-      year: number;
-      month: number;
-      day: number;
-    };
-    endDate: {
-      year: number;
-      month: number;
-      day: number;
-    };
-    bannerImage: string;
-    season: string;
-    seasonYear: number;
-    description: string;
-    type: MediaType;
-    format: MediaFormat;
-    status: MediaStatus;
-    episodes: number;
-    duration: number;
-    chapters: number;
-    volumes: number;
-    genres: string[];
-    isAdult: boolean;
-    averageScore: number;
-    popularity: number;
-    nextAiringEpisode: {
-      airingAt: number;
-      timeUntilAiring: number;
-      episode: number;
-    };
-    mediaListEntry: {
-      id: number;
-      status: MediaStatus;
-    };
-    studios: {
-      edges: {
-        isMain: boolean;
-        node: {
-          id: number;
-          name: string;
-        };
-      }[];
-    };
-  }[];
+  media: SearchResultAnimeMedia[];
 };

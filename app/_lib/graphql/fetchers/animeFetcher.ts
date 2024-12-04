@@ -9,7 +9,6 @@ export const fetchAnime = async (variables: SearchAnimeVariables) => {
       variables,
       fetchPolicy: "cache-first",
     });
-    client.cache.extract();
 
     console.log("Data:", data.Page);
     console.log("Cache:", client.cache.extract());
