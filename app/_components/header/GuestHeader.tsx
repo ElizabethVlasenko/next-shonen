@@ -17,7 +17,7 @@ export default function GuestHeader() {
       <Wrapper className="flex items-center justify-between">
         <Logo />
         <GuestNav />
-        <p>Log in / Sing up</p>
+        <p>login / sign in</p>
       </Wrapper>
     </header>
   );

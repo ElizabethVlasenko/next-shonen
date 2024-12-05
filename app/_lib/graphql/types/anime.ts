@@ -45,7 +45,7 @@ export type SearchAnimeVariables = {
   type?: MediaType;
   isAdult: boolean;
   search?: string;
-  format?: MediaFormat[];
+  format?: MediaFormat;
   status?: MediaStatus;
   countryOfOrigin?: string;
   source?: string;
@@ -72,6 +72,18 @@ export type SearchAnimeVariables = {
   sort?: string[];
 };
 
+export type NextAiringEpisode = {
+  airingAt: number;
+  timeUntilAiring: number;
+  episode: number;
+};
+
+export type DateYMD = {
+  year: number;
+  month: number;
+  day: number;
+};
+
 export type SearchResultAnimeMedia = {
   id: number;
   title: {
@@ -82,16 +94,8 @@ export type SearchResultAnimeMedia = {
     large: string;
     color: string;
   };
-  startDate: {
-    year: number;
-    month: number;
-    day: number;
-  };
-  endDate: {
-    year: number;
-    month: number;
-    day: number;
-  };
+  startDate: DateYMD;
+  endDate: DateYMD;
   bannerImage: string;
   season: string;
   seasonYear: number;
@@ -107,11 +111,7 @@ export type SearchResultAnimeMedia = {
   isAdult: boolean;
   averageScore: number;
   popularity: number;
-  nextAiringEpisode: {
-    airingAt: number;
-    timeUntilAiring: number;
-    episode: number;
-  };
+  nextAiringEpisode: NextAiringEpisode;
   mediaListEntry: {
     id: number;
     status: MediaStatus;

@@ -17,7 +17,7 @@ export default function MainHeader() {
       <Wrapper className="flex items-center justify-between">
         <Logo />
         <MainNav />
-        <p>Profile</p>
+        <p>pfp / profile name</p>
       </Wrapper>
     </header>
   );

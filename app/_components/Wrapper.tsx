@@ -5,7 +5,7 @@ export default function Wrapper({
   className,
 }: Readonly<{ children: React.ReactNode; className?: string }>) {
   return (
-    <div className={`mx-8 h-auto w-full max-w-5xl ${className}`}>
+    <div className={`mx-8 h-auto w-full max-w-6xl ${className}`}>
       {children}
     </div>
   );
