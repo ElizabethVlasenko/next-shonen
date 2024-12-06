@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
 import Image from "next/image";
+import { useState } from "react";
+import getTextColorForBG from "../../_lib/color";
+import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
 import StatusTag from "../ui/StatusTag";
 import AnimeAiringInfo from "./AnimeAiringInfo";
 
@@ -16,6 +17,10 @@ export default function SearchCategoriesPreviewCard({
   index,
 }: SearchCategoriesPreviewCardProps) {
   const [isShowMoreInfo, setIsShowMoreInfo] = useState(false);
+
+  const animePrimaryColor = anime.coverImage.color;
+  const textColor = getTextColorForBG(animePrimaryColor);
+
   let displayPositionStyles;
 
   if (index < 3) {
@@ -59,7 +64,7 @@ export default function SearchCategoriesPreviewCard({
             {anime.genres.slice(0, 3).map((genre) => (
               <span
                 style={{ backgroundColor: anime.coverImage.color }}
-                className={`text-bold block rounded-full px-3 py-1 font-serif text-sm text-white`}
+                className={`block rounded-full px-3 py-1 font-sans text-sm font-bold ${textColor} `}
                 key={genre}
               >
                 {genre}
