@@ -75,6 +75,9 @@ export const SEARCH_ANIME = gql`
       ) {
         id
         title {
+          english
+          romaji
+          native
           userPreferred
         }
         coverImage {

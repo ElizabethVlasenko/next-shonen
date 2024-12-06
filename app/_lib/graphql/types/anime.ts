@@ -87,6 +87,9 @@ export type DateYMD = {
 export type SearchResultAnimeMedia = {
   id: number;
   title: {
+    english: string;
+    romaji: string;
+    native: string;
     userPreferred: string;
   };
   coverImage: {
