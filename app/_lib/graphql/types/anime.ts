@@ -1,3 +1,41 @@
+export type SearchAnimeVariables = {
+  page?: number;
+  perPage?: number;
+  id?: number;
+  type?: MediaType;
+  isAdult: boolean;
+  search?: string;
+  format?: MediaFormat;
+  status?: MediaStatus;
+  countryOfOrigin?: string;
+  source?: string;
+  season?: string;
+  seasonYear?: number;
+  year?: string;
+  yearLesser?: number;
+  yearGreater?: number;
+  episodeLesser?: number;
+  episodeGreater?: number;
+  durationLesser?: number;
+  durationGreater?: number;
+  chapterLesser?: number;
+  chapterGreater?: number;
+  volumeLesser?: number;
+  volumeGreater?: number;
+  licensedBy?: number[];
+  isLicensed?: boolean;
+  genres?: string[];
+  excludedGenres?: string[];
+  tags?: string[];
+  excludedTags?: string[];
+  minimumTagRank?: number;
+  sort?: string[];
+};
+
+export type SearchAnimeByIdVariables = {
+  mediaId: number;
+};
+
 export type MediaFormat =
   | "TV"
   | "TV_SHORT"
@@ -38,40 +76,6 @@ export type MediaSeason = "WINTER" | "SPRING" | "SUMMER" | "FALL";
 
 export type MediaType = "ANIME" | "MANGA";
 
-export type SearchAnimeVariables = {
-  page?: number;
-  perPage?: number;
-  id?: number;
-  type?: MediaType;
-  isAdult: boolean;
-  search?: string;
-  format?: MediaFormat;
-  status?: MediaStatus;
-  countryOfOrigin?: string;
-  source?: string;
-  season?: string;
-  seasonYear?: number;
-  year?: string;
-  yearLesser?: number;
-  yearGreater?: number;
-  episodeLesser?: number;
-  episodeGreater?: number;
-  durationLesser?: number;
-  durationGreater?: number;
-  chapterLesser?: number;
-  chapterGreater?: number;
-  volumeLesser?: number;
-  volumeGreater?: number;
-  licensedBy?: number[];
-  isLicensed?: boolean;
-  genres?: string[];
-  excludedGenres?: string[];
-  tags?: string[];
-  excludedTags?: string[];
-  minimumTagRank?: number;
-  sort?: string[];
-};
-
 export type NextAiringEpisode = {
   airingAt: number;
   timeUntilAiring: number;
@@ -84,14 +88,16 @@ export type DateYMD = {
   day: number;
 };
 
+export type Title = {
+  english: string;
+  romaji: string;
+  native: string;
+  userPreferred: string;
+};
+
 export type SearchResultAnimeMedia = {
   id: number;
-  title: {
-    english: string;
-    romaji: string;
-    native: string;
-    userPreferred: string;
-  };
+  title: Title;
   coverImage: {
     extraLarge: string;
     large: string;

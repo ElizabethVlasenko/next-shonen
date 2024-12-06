@@ -132,3 +132,16 @@ export const SEARCH_ANIME = gql`
     }
   }
 `;
+
+export const SEARCH_ANIME_BY_ID = gql`
+  query Query($mediaId: Int) {
+    Media(id: $mediaId) {
+      title {
+        english
+        native
+        romaji
+        userPreferred
+      }
+    }
+  }
+`;
