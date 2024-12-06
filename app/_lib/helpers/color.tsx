@@ -1,6 +1,6 @@
 import Color from "color";
 
-export default function getTextColorForBG(bgColor: string) {
+export function getTextColorForBG(bgColor: string) {
   const whiteText = Color("#FFFFFF");
   const darkPrimaryText = Color("rgb(47, 36, 83)");
 
