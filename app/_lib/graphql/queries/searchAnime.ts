@@ -133,6 +133,296 @@ export const SEARCH_ANIME = gql`
   }
 `;
 
+export const SEARCH_ANIME_TOP_CHART = gql`
+  query (
+    $page: Int = 1
+    $perPage: Int = 10
+    $type: MediaType = ANIME
+    $isAdult: Boolean = false
+    $season: MediaSeason
+    $nextSeason: MediaSeason
+    $seasonYear: Int
+    $nextSeasonYear: Int
+  ) {
+    trending: Page(page: $page, perPage: $perPage) {
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+      media(type: $type, sort: [TRENDING_DESC], isAdult: $isAdult) {
+        id
+        title {
+          english
+          romaji
+          native
+          userPreferred
+        }
+        coverImage {
+          extraLarge
+          large
+          color
+        }
+        startDate {
+          year
+          month
+          day
+        }
+        endDate {
+          year
+          month
+          day
+        }
+        bannerImage
+        season
+        seasonYear
+        description
+        type
+        format
+        status(version: 2)
+        episodes
+        duration
+        chapters
+        volumes
+        genres
+        isAdult
+        averageScore
+        popularity
+        nextAiringEpisode {
+          airingAt
+          timeUntilAiring
+          episode
+        }
+        mediaListEntry {
+          id
+          status
+        }
+        studios(isMain: true) {
+          edges {
+            isMain
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+    popularSeason: Page(page: $page, perPage: $perPage) {
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+      media(
+        type: $type
+        season: $season
+        seasonYear: $seasonYear
+        sort: [POPULARITY_DESC]
+        isAdult: $isAdult
+      ) {
+        id
+        title {
+          english
+          romaji
+          native
+          userPreferred
+        }
+        coverImage {
+          extraLarge
+          large
+          color
+        }
+        startDate {
+          year
+          month
+          day
+        }
+        endDate {
+          year
+          month
+          day
+        }
+        bannerImage
+        season
+        seasonYear
+        description
+        type
+        format
+        status(version: 2)
+        episodes
+        duration
+        chapters
+        volumes
+        genres
+        isAdult
+        averageScore
+        popularity
+        nextAiringEpisode {
+          airingAt
+          timeUntilAiring
+          episode
+        }
+        mediaListEntry {
+          id
+          status
+        }
+        studios(isMain: true) {
+          edges {
+            isMain
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+    popularNextSeason: Page(page: $page, perPage: $perPage) {
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+      media(
+        type: $type
+        season: $nextSeason
+        seasonYear: $nextSeasonYear
+        sort: [POPULARITY_DESC]
+        isAdult: $isAdult
+      ) {
+        id
+        title {
+          english
+          romaji
+          native
+          userPreferred
+        }
+        coverImage {
+          extraLarge
+          large
+          color
+        }
+        startDate {
+          year
+          month
+          day
+        }
+        endDate {
+          year
+          month
+          day
+        }
+        bannerImage
+        season
+        seasonYear
+        description
+        type
+        format
+        status(version: 2)
+        episodes
+        duration
+        chapters
+        volumes
+        genres
+        isAdult
+        averageScore
+        popularity
+        nextAiringEpisode {
+          airingAt
+          timeUntilAiring
+          episode
+        }
+        mediaListEntry {
+          id
+          status
+        }
+        studios(isMain: true) {
+          edges {
+            isMain
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+    allTimePopular: Page(page: $page, perPage: $perPage) {
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+      media(type: $type, sort: [POPULARITY_DESC], isAdult: $isAdult) {
+        id
+        title {
+          english
+          romaji
+          native
+          userPreferred
+        }
+        coverImage {
+          extraLarge
+          large
+          color
+        }
+        startDate {
+          year
+          month
+          day
+        }
+        endDate {
+          year
+          month
+          day
+        }
+        bannerImage
+        season
+        seasonYear
+        description
+        type
+        format
+        status(version: 2)
+        episodes
+        duration
+        chapters
+        volumes
+        genres
+        isAdult
+        averageScore
+        popularity
+        nextAiringEpisode {
+          airingAt
+          timeUntilAiring
+          episode
+        }
+        mediaListEntry {
+          id
+          status
+        }
+        studios(isMain: true) {
+          edges {
+            isMain
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const SEARCH_ANIME_BY_ID = gql`
   query Query($mediaId: Int) {
     Media(id: $mediaId) {

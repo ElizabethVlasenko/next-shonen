@@ -95,6 +95,13 @@ export type Title = {
   userPreferred: string;
 };
 
+export type SearchAnimeTopChart = {
+  trending: SearchResultAnime;
+  popularSeason: SearchResultAnime;
+  popularNextSeason: SearchResultAnime;
+  allTimePopular: SearchResultAnime;
+};
+
 export type SearchResultAnimeMedia = {
   id: number;
   title: Title;
@@ -106,7 +113,7 @@ export type SearchResultAnimeMedia = {
   startDate: DateYMD;
   endDate: DateYMD;
   bannerImage: string;
-  season: string;
+  season: MediaSeason;
   seasonYear: number;
   description: string;
   type: MediaType;
