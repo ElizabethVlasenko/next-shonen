@@ -1,3 +1,5 @@
 export function generateSlug(title: string) {
-  return title.replace(/ /g, "-").replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "");
+  if (!title) return "";
+  if (title)
+    return title.replace(/ /g, "-").replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, "");
 }

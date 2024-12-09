@@ -1,103 +1,65 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
-import getTextColorForBG from "../../_lib/color";
 import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
 import StatusTag from "../ui/StatusTag";
-import AnimeAiringInfo from "./AnimeAiringInfo";
+import CardMoreContent from "./CardMoreContent";
+import { generateSlug } from "../../_lib/helpers/slugGenerator";
 
 type SearchCategoriesPreviewCardProps = {
   anime: SearchResultAnimeMedia;
-  index: number;
 };
 
 export default function SearchCategoriesPreviewCard({
   anime,
-  index,
 }: SearchCategoriesPreviewCardProps) {
   const [isShowMoreInfo, setIsShowMoreInfo] = useState(false);
 
-  const animePrimaryColor = anime.coverImage.color;
-  const textColor = getTextColorForBG(animePrimaryColor);
-
-  let displayPositionStyles;
-
-  if (index < 3) {
-    displayPositionStyles =
-      " rounded-r-lg pl-7 " +
-      (isShowMoreInfo ? "-right-44 shadow-lg" : "right-0");
-  } else {
-    displayPositionStyles =
-      " rounded-l-lg pr-7 " +
-      (isShowMoreInfo ? "-left-44 shadow-lg" : "left-0");
-  }
-
   return (
-    <>
+    <Link href={`/anime/${anime.id}/${generateSlug(anime.title.english)}`}>
       <li
-        className={`relative h-auto ${isShowMoreInfo ? "z-[3]" : ""}`}
+        className={`relative h-auto`}
         key={anime.id}
         onMouseEnter={() => setIsShowMoreInfo(true)}
         onMouseLeave={() => setIsShowMoreInfo(false)}
       >
-        <div
-          className={`absolute h-full w-48 rounded-lg bg-primary-50 p-3 ${displayPositionStyles} overflow-hidden`}
-        >
-          <AnimeAiringInfo
-            nextAiringEpisode={anime.nextAiringEpisode}
-            startDate={anime.startDate}
-            endDate={anime.endDate}
-          />
-          <p>rating: {anime.averageScore}</p>
-
-          <p>{anime.studios.edges[0]?.node.name}</p>
-
-          <p>{anime.coverImage.color}</p>
-
-          <p>
-            {anime.format}
-            {anime.episodes ? " | " + anime.episodes + " episodes" : ""}
-          </p>
-
-          <div className="flex flex-wrap gap-2">
-            {anime.genres.slice(0, 3).map((genre) => (
-              <span
-                style={{ backgroundColor: anime.coverImage.color }}
-                className={`block rounded-full px-3 py-1 font-sans text-sm font-bold ${textColor} `}
-                key={genre}
-              >
-                {genre}
-              </span>
-            ))}
-          </div>
-          {/* airing info, rating, company,  numbers of episodes, tags (action, comedy) */}
-        </div>
-
-        <div className="relative flex h-full w-48 min-w-48 flex-col items-center rounded-lg bg-primary-50 transition hover:shadow-lg dark:bg-primary-800">
-          {/* background colored in anime specific color  */}
-          <div
-            style={{ backgroundColor: anime.coverImage.color }}
-            className="absolute inset-0 rounded-lg opacity-60 brightness-125 dark:brightness-75"
-          ></div>
-
-          <div className="relative h-64 w-48 object-cover shadow-sm">
+        <div className="relative flex h-full w-48 min-w-48 flex-col items-center overflow-hidden rounded-lg bg-primary-50 transition hover:shadow-lg dark:bg-primary-800">
+          {/* image */}
+          <div className="relative mb-14 h-64 w-48 object-cover shadow-sm">
             <Image
               src={anime.coverImage.large}
-              alt={anime.title.userPreferred}
+              alt={anime.title.english}
+              sizes="(min-width: 768px) 16rem"
               fill
               className="rounded-t-lg object-cover"
             />
           </div>
-          <h3 className="truncate-2-lines z-[1] mb-4 mt-3 flex-grow px-4 text-center text-base font-medium leading-5">
-            {anime.title.userPreferred || anime.title.userPreferred}
-          </h3>
-          <StatusTag
-            status={anime.status}
-            className="*: absolute -left-1 -top-1 z-[2]"
-          />
+          <div
+            className={`absolute bottom-0 w-full rounded-lg bg-white p-4 pt-3 transition-all duration-300 ease-in-out dark:bg-black ${isShowMoreInfo ? "h-[19.5rem]" : "h-16"}`}
+          >
+            {/* background colored in anime primary color */}
+            <div
+              style={{ backgroundColor: anime.coverImage.color || "#8173C6" }}
+              className="absolute inset-0 h-full w-48 rounded-lg opacity-60 brightness-125 dark:brightness-75"
+            ></div>
+            <div className="relative">
+              <h3
+                className={`flex-grow text-center text-lg font-medium leading-5 ${isShowMoreInfo ? "truncate-3-lines mb-2" : "truncate-2-lines"}`}
+              >
+                {anime.title.english}
+              </h3>
+              {isShowMoreInfo && <CardMoreContent anime={anime} />}
+            </div>
+          </div>
         </div>
+
+        <StatusTag
+          status={anime.status}
+          className="*: absolute -left-1 -top-1 z-[2]"
+        />
       </li>
-    </>
+    </Link>
   );
 }

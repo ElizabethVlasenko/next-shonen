@@ -10,7 +10,7 @@ export default function MainHeader() {
 
   return (
     <header
-      className={`fixed flex h-20 w-full justify-center bg-primary-500 transition-transform duration-300 dark:bg-primary-800 ${
+      className={`fixed z-10 flex h-20 w-full justify-center bg-primary-500 transition-transform duration-300 dark:bg-primary-800 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >

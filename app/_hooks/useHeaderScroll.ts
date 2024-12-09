@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 export default function useHeaderScroll() {
+  //TODO: fix header so it is visible when scroll up
   const [isVisible, setIsVisible] = useState<boolean>(true);
 
   const handleScroll = useCallback(() => {

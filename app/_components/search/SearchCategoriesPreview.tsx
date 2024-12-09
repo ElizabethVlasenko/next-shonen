@@ -5,6 +5,7 @@ import SearchCategoriesPreviewCard from "./SearchCategoriesPreviewCard";
 type SearchCategoriesPreviewProps = {
   title: string;
   href: string;
+  number: number; //number of shown entries
   results: SearchResultAnimeMedia[];
 };
 
@@ -12,6 +13,7 @@ export default function SearchCategoriesPreview({
   title,
   href,
   results,
+  number,
 }: SearchCategoriesPreviewProps) {
   return (
     <div className="rounded-lg bg-white p-8 pt-5 text-primary-700 shadow-md dark:bg-primary-900 dark:text-primary-50">
@@ -22,8 +24,8 @@ export default function SearchCategoriesPreview({
       </div>
       {/* Category list of anime/manga titles (5 per category)*/}
       <ul className="relative flex justify-between gap-6">
-        {results.map((anime, i) => (
-          <SearchCategoriesPreviewCard key={anime.id} anime={anime} index={i} />
+        {results.slice(0, number).map((anime) => (
+          <SearchCategoriesPreviewCard key={anime.id} anime={anime} />
         ))}
       </ul>
     </div>
