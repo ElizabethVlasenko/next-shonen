@@ -8,13 +8,11 @@ import StatusTag from "../ui/StatusTag";
 import CardMoreContent from "./CardMoreContent";
 import { generateSlug } from "../../_lib/helpers/slugGenerator";
 
-type SearchCategoriesPreviewCardProps = {
+type SearchPreviewCardProps = {
   anime: SearchResultAnimeMedia;
 };
 
-export default function SearchCategoriesPreviewCard({
-  anime,
-}: SearchCategoriesPreviewCardProps) {
+export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
   const [isShowMoreInfo, setIsShowMoreInfo] = useState(false);
 
   return (
@@ -25,7 +23,7 @@ export default function SearchCategoriesPreviewCard({
         onMouseEnter={() => setIsShowMoreInfo(true)}
         onMouseLeave={() => setIsShowMoreInfo(false)}
       >
-        <div className="relative flex h-full w-48 min-w-48 flex-col items-center overflow-hidden rounded-lg bg-primary-50 transition hover:shadow-lg dark:bg-primary-800">
+        <div className="relative flex h-full w-48 min-w-48 flex-col items-center overflow-hidden rounded-lg bg-primary-50 text-primary-800 transition hover:shadow-lg dark:bg-primary-800 dark:text-primary-50">
           {/* image */}
           <div className="relative mb-14 h-64 w-48 object-cover shadow-sm">
             <Image
@@ -57,7 +55,7 @@ export default function SearchCategoriesPreviewCard({
 
         <StatusTag
           status={anime.status}
-          className="*: absolute -left-1 -top-1 z-[2]"
+          className="absolute -left-1 -top-1 z-[2]"
         />
       </li>
     </Link>

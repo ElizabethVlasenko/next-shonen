@@ -23,7 +23,9 @@ export default async function page() {
 
   return (
     <div>
-      <h1 className="pb-4 text-xl text-primary-800">TODO: Anime Search Bar</h1>
+      <h1 className="pb-4 text-xl text-primary-800 dark:text-primary-50">
+        TODO: Anime Search Bar
+      </h1>
       <div className="space-y-8">
         <SearchCategoriesPreview
           number={5}

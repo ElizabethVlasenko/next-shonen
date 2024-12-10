@@ -1,7 +1,7 @@
 import { add, compareAsc, formatDistanceToNow } from "date-fns";
 import {
-  MediaSeason,
-  MediaStatus,
+  type MediaSeason,
+  type MediaStatus,
   type DateYMD,
   type NextAiringEpisode,
 } from "../../_lib/graphql/types/anime";

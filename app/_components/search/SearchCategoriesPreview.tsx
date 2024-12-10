@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
-import SearchCategoriesPreviewCard from "./SearchCategoriesPreviewCard";
+import SearchPreviewCard from "./SearchCategoriesPreviewCard";
 
 type SearchCategoriesPreviewProps = {
   title: string;
@@ -20,12 +20,13 @@ export default function SearchCategoriesPreview({
       {/* Category title */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-semibold">{title}</h2>
+        {/* TODO: custom link component */}
         <Link href={href}>View all</Link>
       </div>
       {/* Category list of anime/manga titles (5 per category)*/}
       <ul className="relative flex justify-between gap-6">
         {results.slice(0, number).map((anime) => (
-          <SearchCategoriesPreviewCard key={anime.id} anime={anime} />
+          <SearchPreviewCard key={anime.id} anime={anime} />
         ))}
       </ul>
     </div>
