@@ -7,6 +7,7 @@ import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
 import StatusTag from "../ui/StatusTag";
 import CardMoreContent from "./CardMoreContent";
 import { generateSlug } from "../../_lib/helpers/slugGenerator";
+import Color from "color";
 
 type SearchPreviewCardProps = {
   anime: SearchResultAnimeMedia;
@@ -14,6 +15,31 @@ type SearchPreviewCardProps = {
 
 export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
   const [isShowMoreInfo, setIsShowMoreInfo] = useState(false);
+
+  //background color adjustments
+  const animePrimaryColor = Color(anime.coverImage.color || "#634fb7");
+  let bgBrightness = "";
+
+  if (animePrimaryColor.luminosity() < 0.5) {
+    bgBrightness = "brightness-125";
+  }
+
+  if (animePrimaryColor.luminosity() < 0.25) {
+    bgBrightness = "brightness-150";
+  }
+
+  if (animePrimaryColor.luminosity() < 0.1) {
+    bgBrightness = "brightness-200";
+  }
+
+  console.log(
+    "color: " +
+      animePrimaryColor +
+      " brightness: " +
+      bgBrightness +
+      " luminosity " +
+      animePrimaryColor.luminosity(),
+  );
 
   return (
     <Link href={`/anime/${anime.id}/${generateSlug(anime.title.english)}`}>
@@ -40,7 +66,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
             {/* background colored in anime primary color */}
             <div
               style={{ backgroundColor: anime.coverImage.color || "#8173C6" }}
-              className="absolute inset-0 h-full w-48 rounded-lg opacity-60 brightness-125 dark:brightness-75"
+              className={`absolute inset-0 h-full w-48 rounded-lg opacity-60 dark:brightness-75 ${bgBrightness}`}
             ></div>
             <div className="relative">
               <h3
