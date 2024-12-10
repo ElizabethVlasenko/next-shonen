@@ -32,15 +32,6 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
     bgBrightness = "brightness-200";
   }
 
-  console.log(
-    "color: " +
-      animePrimaryColor +
-      " brightness: " +
-      bgBrightness +
-      " luminosity " +
-      animePrimaryColor.luminosity(),
-  );
-
   return (
     <Link href={`/anime/${anime.id}/${generateSlug(anime.title.english)}`}>
       <li

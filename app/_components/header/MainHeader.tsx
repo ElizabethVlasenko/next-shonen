@@ -4,6 +4,7 @@ import Wrapper from "../Wrapper";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
 import useHeaderScroll from "../../_hooks/useHeaderScroll";
+import DarkThemeHandler from "../ui/DarkThemeHandler";
 
 export default function MainHeader() {
   const isVisible = useHeaderScroll();
@@ -17,7 +18,10 @@ export default function MainHeader() {
       <Wrapper className="flex items-center justify-between">
         <Logo />
         <MainNav />
-        <p>pfp / profile name</p>
+        <div className="flex h-full flex-row items-center justify-center gap-4">
+          <DarkThemeHandler type="toggle" />
+          <p>pfp / profile name</p>
+        </div>
       </Wrapper>
     </header>
   );
