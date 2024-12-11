@@ -2,7 +2,7 @@
 
 import Wrapper from "../Wrapper";
 import Logo from "./Logo";
-import useHeaderScroll from "../../_hooks/useHeaderScroll";
+import useHeaderScroll from "../../_lib/hooks/useHeaderScroll";
 import GuestNav from "./GuestNav";
 import DarkThemeHandler from "../ui/DarkThemeHandler";
 

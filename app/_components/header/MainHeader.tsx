@@ -3,7 +3,7 @@
 import Wrapper from "../Wrapper";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
-import useHeaderScroll from "../../_hooks/useHeaderScroll";
+import useHeaderScroll from "../../_lib/hooks/useHeaderScroll";
 import DarkThemeHandler from "../ui/DarkThemeHandler";
 
 export default function MainHeader() {
