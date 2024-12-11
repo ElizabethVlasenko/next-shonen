@@ -52,7 +52,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
             />
           </div>
           <div
-            className={`absolute bottom-0 w-full rounded-lg bg-white p-4 pt-3 transition-all duration-300 ease-in-out dark:bg-black ${isShowMoreInfo ? "h-[19.5rem]" : "h-16"}`}
+            className={`absolute bottom-0 w-full rounded-lg bg-white p-4 px-5 pt-3 transition-all duration-300 ease-in-out dark:bg-black ${isShowMoreInfo ? "h-[19.5rem]" : "h-16"}`}
           >
             {/* background colored in anime primary color */}
             <div
@@ -61,7 +61,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
             ></div>
             <div className="relative">
               <h3
-                className={`flex-grow text-center text-lg font-medium leading-5 ${isShowMoreInfo ? "truncate-3-lines mb-2" : "truncate-2-lines"}`}
+                className={`flex-grow text-center text-lg font-medium leading-5 ${isShowMoreInfo ? "truncate-3-lines mb-4" : "truncate-2-lines"}`}
               >
                 {anime.title.english}
               </h3>

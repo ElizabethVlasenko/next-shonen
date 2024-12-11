@@ -14,7 +14,7 @@ export default function CardMoreContent({ anime }: CardMoreContentProps) {
 
   return (
     <>
-      <p className="mb-2 text-sm font-bold text-primary-800 dark:text-primary-50">
+      <p className="mb-1 text-sm font-bold text-primary-800 dark:text-primary-50">
         {anime.nextAiringEpisode ? (
           <AnimeAiringInfo
             status={anime.status}
@@ -30,12 +30,12 @@ export default function CardMoreContent({ anime }: CardMoreContentProps) {
       </p>
 
       {anime.averageScore && (
-        <p className="mb-2 text-sm font-bold text-primary-800 dark:text-primary-50">
-          {anime.averageScore}%
+        <p className="mb-2 text-xs text-primary-800 dark:text-primary-50">
+          <span className="text-base font-bold">{anime.averageScore}</span>/100
         </p>
       )}
 
-      <p className="text-sm leading-3 text-primary-800 dark:text-primary-50">
+      <p className="truncate-2-lines mb-1 text-sm leading-4 text-primary-800 dark:text-primary-50">
         {anime.studios.edges[0]?.node.name}
       </p>
 
