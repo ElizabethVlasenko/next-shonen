@@ -1,5 +1,7 @@
-import Link from "next/link";
+"use client";
+
 import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
+import Button from "../ui/Button";
 import SearchPreviewCard from "./SearchCategoriesPreviewCard";
 
 type SearchCategoriesPreviewProps = {
@@ -21,7 +23,9 @@ export default function SearchCategoriesPreview({
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-semibold">{title}</h2>
         {/* TODO: custom link component */}
-        <Link href={href}>View all</Link>
+        <Button variant="link" size="sm" href={href}>
+          View All
+        </Button>
       </div>
       {/* Category list of anime/manga titles (5 per category)*/}
       <ul className="relative flex justify-between gap-6">

@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import useHeaderScroll from "../../_lib/hooks/useHeaderScroll";
 import GuestNav from "./GuestNav";
 import DarkThemeHandler from "../ui/DarkThemeHandler";
+import Button from "../ui/Button";
 
 export default function GuestHeader() {
   const isVisible = useHeaderScroll();
@@ -18,9 +19,14 @@ export default function GuestHeader() {
       <Wrapper className="flex items-center justify-between">
         <Logo />
         <GuestNav />
-        <div className="flex h-full flex-row items-center justify-center gap-4">
-          <DarkThemeHandler type="toggle" />
-          <p>login / sign in</p>
+        <div className="flex h-full flex-row items-center justify-center gap-2">
+          <DarkThemeHandler type="toggle" className="mr-2" />
+          <Button context="header" href="/login" variant="link">
+            Login
+          </Button>
+          <Button context="header" href="/signup">
+            Sign up
+          </Button>
         </div>
       </Wrapper>
     </header>

@@ -9,9 +9,13 @@ import { useDarkMode } from "../../_lib/Context/DarkModeContext";
 
 type DarkThemeHandlerProps = {
   type: "toggle" | "buttons";
+  className?: string;
 };
 
-export default function DarkThemeHandler({ type }: DarkThemeHandlerProps) {
+export default function DarkThemeHandler({
+  type,
+  className,
+}: DarkThemeHandlerProps) {
   const { isDarkMode, toggleDarkMode, setDarkMode } = useDarkMode();
   let systemTheme = false;
   if (typeof window !== "undefined") {
@@ -23,11 +27,15 @@ export default function DarkThemeHandler({ type }: DarkThemeHandlerProps) {
       <div className="h-6 w-6">
         {isDarkMode ? (
           <button onClick={toggleDarkMode}>
-            <SunIcon className="h-6 w-6 text-primary-50 transition-colors hover:text-accent-200" />
+            <SunIcon
+              className={`h-6 w-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}
+            />
           </button>
         ) : (
           <button onClick={toggleDarkMode}>
-            <MoonIcon className="h-6 w-6 text-primary-50 transition-colors hover:text-accent-200" />
+            <MoonIcon
+              className={`h-6 w-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}
+            />
           </button>
         )}
       </div>
