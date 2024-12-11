@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 
 export function useLocalStorageState(
@@ -5,7 +7,10 @@ export function useLocalStorageState(
   key: string,
 ): [boolean, React.Dispatch<React.SetStateAction<boolean>>] {
   const [value, setValue] = useState<boolean>(function () {
-    const storedValue = localStorage.getItem(key);
+    let storedValue;
+    if (typeof window !== "undefined") {
+      storedValue = localStorage.getItem(key);
+    }
     return storedValue ? JSON.parse(storedValue) : initialState;
   });
 

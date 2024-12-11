@@ -1,4 +1,5 @@
 "use client";
+
 import { createContext, ReactNode, useContext, useEffect } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
@@ -15,8 +16,13 @@ type DarkModeContextProviderProps = {
 };
 
 function DarkModeProvider({ children }: DarkModeContextProviderProps) {
+  let systemTheme = false;
+  if (typeof window !== "undefined") {
+    systemTheme = window.matchMedia("(prefers-color-scheme: dark").matches;
+  }
+
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
-    window.matchMedia("(prefers-color-scheme: dark").matches,
+    systemTheme,
     "isDarkMode",
   );
 

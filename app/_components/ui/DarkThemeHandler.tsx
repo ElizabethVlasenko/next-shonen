@@ -13,6 +13,10 @@ type DarkThemeHandlerProps = {
 
 export default function DarkThemeHandler({ type }: DarkThemeHandlerProps) {
   const { isDarkMode, toggleDarkMode, setDarkMode } = useDarkMode();
+  let systemTheme = false;
+  if (typeof window !== "undefined") {
+    systemTheme = window.matchMedia("(prefers-color-scheme: dark").matches;
+  }
 
   if (type === "toggle") {
     return (
@@ -49,11 +53,7 @@ export default function DarkThemeHandler({ type }: DarkThemeHandlerProps) {
 
           <ThemeButton
             label="System Theme"
-            changeTheme={() =>
-              setDarkMode(
-                window.matchMedia("(prefers-color-scheme: dark").matches,
-              )
-            }
+            changeTheme={() => setDarkMode(systemTheme)}
           >
             <ComputerDesktopIcon className="h-6 w-6 text-primary-50 transition-colors group-hover:text-accent-200" />
           </ThemeButton>
