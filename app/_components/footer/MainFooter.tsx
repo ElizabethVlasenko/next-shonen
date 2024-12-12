@@ -13,6 +13,18 @@ export default function MainFooter() {
           &copy; {new Date().getFullYear()} NextShonen by Yelyzaveta Vlasenko.
           All rights reserved.
         </p>
+        <p className="text-center text-sm text-primary-200">
+          This website is built for educational purposes using data from the{" "}
+          <a
+            href="https://docs.anilist.co/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-200 hover:text-accent-300"
+          >
+            AniList API
+          </a>
+          . All images and media belong to their respective copyright owners.
+        </p>
       </div>
     </footer>
   );
