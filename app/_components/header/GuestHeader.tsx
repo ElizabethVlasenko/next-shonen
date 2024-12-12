@@ -21,10 +21,10 @@ export default function GuestHeader() {
         <GuestNav />
         <div className="flex h-full flex-row items-center justify-center gap-2">
           <DarkThemeHandler type="toggle" className="mr-2" />
-          <Button context="header" href="/login" variant="link">
+          <Button href="/login" variant="linkReverse">
             Login
           </Button>
-          <Button context="header" href="/signup">
+          <Button href="/signup" variant="primaryReverse">
             Sign up
           </Button>
         </div>
