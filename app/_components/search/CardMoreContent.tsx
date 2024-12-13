@@ -15,18 +15,14 @@ export default function CardMoreContent({ anime }: CardMoreContentProps) {
   return (
     <>
       <p className="mb-1 text-sm font-bold text-primary-800 dark:text-primary-50">
-        {anime.nextAiringEpisode ? (
-          <AnimeAiringInfo
-            status={anime.status}
-            nextAiringEpisode={anime.nextAiringEpisode}
-            startDate={anime.startDate}
-            endDate={anime.endDate}
-            season={anime.season}
-            seasonYear={anime.seasonYear}
-          />
-        ) : (
-          anime.season + " " + anime.seasonYear
-        )}
+        <AnimeAiringInfo
+          status={anime.status}
+          nextAiringEpisode={anime.nextAiringEpisode}
+          startDate={anime.startDate}
+          endDate={anime.endDate}
+          season={anime.season}
+          seasonYear={anime.seasonYear}
+        />
       </p>
 
       {anime.averageScore && (
@@ -35,9 +31,11 @@ export default function CardMoreContent({ anime }: CardMoreContentProps) {
         </p>
       )}
 
-      <p className="truncate-2-lines mb-1 text-sm leading-4 text-primary-800 dark:text-primary-50">
-        {anime.studios.edges[0]?.node.name}
-      </p>
+      {anime.studios.edges[0] && (
+        <p className="truncate-2-lines mb-1 text-sm leading-4 text-primary-800 dark:text-primary-50">
+          {anime.studios.edges[0]?.node.name}
+        </p>
+      )}
 
       <p className="mb-2 text-sm text-primary-800 dark:text-primary-50">
         {formatAnimeFormat(anime.format)}

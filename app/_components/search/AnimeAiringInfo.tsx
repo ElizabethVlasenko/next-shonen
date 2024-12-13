@@ -23,11 +23,15 @@ export default function AnimeAiringInfo({
   seasonYear,
   status,
 }: AnimeAiringInfoProps) {
+  if (status === "NOT_YET_RELEASED" && startDate.year === null) {
+    return <>TBA</>;
+  }
   // finished or airing without nextAiringEpisode and endDate year
   if (nextAiringEpisode === null && status !== "NOT_YET_RELEASED") {
     if (!endDate.year) {
       return <>Airing since {startDate.year}</>;
     }
+
     return (
       <>
         {startDate.year} - {endDate.year}

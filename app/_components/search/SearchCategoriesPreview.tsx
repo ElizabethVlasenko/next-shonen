@@ -21,7 +21,7 @@ export default function SearchCategoriesPreview({
     <div className="rounded-lg bg-white p-8 pt-5 text-primary-700 shadow-md dark:bg-primary-900 dark:text-primary-50">
       {/* Category title */}
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-2xl font-semibold">{title}</h2>
+        <h2 className="text-2xl font-semibold">{title} </h2>
         {/* TODO: custom link component */}
         <Button variant="link" size="sm" href={href}>
           View All

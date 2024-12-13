@@ -45,7 +45,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
           <div className="relative mb-14 h-64 w-48 object-cover shadow-sm">
             <Image
               src={anime.coverImage.large}
-              alt={anime.title.english}
+              alt={anime.title.english || anime.title.romaji}
               sizes="(min-width: 768px) 16rem"
               fill
               className="rounded-t-lg object-cover"
@@ -63,7 +63,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
               <h3
                 className={`flex-grow text-center text-lg font-medium leading-5 ${isShowMoreInfo ? "truncate-3-lines mb-4" : "truncate-2-lines"}`}
               >
-                {anime.title.english}
+                {anime.title.english || anime.title.romaji}
               </h3>
               {isShowMoreInfo && <CardMoreContent anime={anime} />}
             </div>
