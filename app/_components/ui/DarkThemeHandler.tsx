@@ -6,6 +6,7 @@ import {
   SunIcon,
 } from "@heroicons/react/16/solid";
 import { useDarkMode } from "../../_lib/Context/DarkModeContext";
+import { useEffect, useState } from "react";
 
 type DarkThemeHandlerProps = {
   type: "toggle" | "buttons";
@@ -17,6 +18,12 @@ export default function DarkThemeHandler({
   className,
 }: DarkThemeHandlerProps) {
   const { isDarkMode, toggleDarkMode, setDarkMode } = useDarkMode();
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
   let systemTheme = false;
   if (typeof window !== "undefined") {
     systemTheme = window.matchMedia("(prefers-color-scheme: dark").matches;
@@ -25,7 +32,7 @@ export default function DarkThemeHandler({
   if (type === "toggle") {
     return (
       <div className="h-6 w-6">
-        {isDarkMode ? (
+        {isDarkMode && domLoaded ? (
           <button onClick={toggleDarkMode}>
             <SunIcon
               className={`h-6 w-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}

@@ -2,24 +2,22 @@
 
 import { useState, useEffect } from "react";
 
-export function useLocalStorageState(
-  initialState: boolean,
+export function useLocalStorageState<T>(
+  initialState: T,
   key: string,
-): [boolean, React.Dispatch<React.SetStateAction<boolean>>] {
-  const [value, setValue] = useState<boolean>(function () {
-    let storedValue;
-    if (typeof window !== "undefined") {
-      storedValue = localStorage.getItem(key);
-    }
-    return storedValue ? JSON.parse(storedValue) : initialState;
-  });
+): [T, React.Dispatch<React.SetStateAction<T>>] {
+  const [value, setValue] = useState<T>(initialState);
 
-  useEffect(
-    function () {
-      localStorage.setItem(key, JSON.stringify(value));
-    },
-    [value, key],
-  );
+  useEffect(() => {
+    const storedValue = localStorage.getItem(key);
+    if (storedValue) {
+      setValue(JSON.parse(storedValue));
+    }
+  }, [key]);
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [value, key]);
 
   return [value, setValue];
 }
