@@ -1,4 +1,10 @@
 import { type Metadata } from "next";
+import SearchCategoriesPreview from "../_components/search/SearchCategoriesPreview";
+import SearchBar from "../_components/search/SearchBar";
+import { fetchAnimeTopChart } from "../_lib/graphql/fetchers/animeFetcher";
+import Button from "../_components/ui/Button";
+import Image from "next/image";
+import { type SearchAnimeTopChart } from "../_lib/graphql/types/anime";
 
 export const metadata: Metadata = {
   title: "NextShōnen: Track, Discover, Share Anime & Manga",
@@ -6,99 +12,78 @@ export const metadata: Metadata = {
     "Discover and track your favorite anime effortlessly with our sleek and modern platform. ",
 };
 
-export default function Home() {
+type PageProps = {
+  searchParams?: { [key: string]: string | string[] };
+};
+
+export default async function Home({ searchParams }: PageProps) {
+  const data = (await fetchAnimeTopChart()) as SearchAnimeTopChart;
+  const currSearchParams = (await searchParams) || {};
+  console.log("search params", currSearchParams);
+  if (Object.keys(currSearchParams).length === 0)
+    console.log("search is empty");
+  // console.log(data);
+
+  const trendingNow = data.trending.media;
+  const popularThisSeason = data.popularSeason.media;
+  const popularNextSeason = data.popularNextSeason.media;
+  const allTimePopular = data.allTimePopular.media;
+
   return (
     <div className="text-primary-700 dark:text-white">
-      <h2 className="mb-2 text-lg font-semibold">Main page</h2>
-      <p className="text-sm">
-        You are not logged in so I&apos;ll show you this page...
-      </p>
-      <p className="pb-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-        porttitor lectus ex, sit amet condimentum magna volutpat non. In
-        tristique eget turpis vel suscipit. Aenean pellentesque eu risus in
-        porta. Duis hendrerit quam in odio vestibulum elementum ac vel nibh.
-        Phasellus lobortis, neque quis malesuada maximus, neque est pharetra
-        ante, semper ultricies nunc ante sit amet eros. Suspendisse risus
-        ligula, porta in finibus id, gravida at odio. Phasellus quis magna nisi.
-        Etiam ac consectetur quam, ut vulputate neque. Nullam pretium mattis ex
-        eu accumsan. Integer non laoreet velit. Fusce commodo fermentum nisi,
-        eget dictum sapien accumsan quis. Cras finibus, quam sit amet vulputate
-        molestie, magna massa lobortis mi, eget tincidunt odio felis ut risus.
-        In euismod ex at mauris semper, at scelerisque lacus auctor. Mauris eget
-        augue et libero euismod dignissim.
-      </p>
-      <p className="pb-1">
-        Proin malesuada mauris sed urna interdum, at sollicitudin velit
-        sagittis. Duis imperdiet dolor erat, eget sollicitudin felis blandit
-        eget. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. Nullam at justo vitae risus luctus
-        efficitur. Cras nec eros eu quam elementum consectetur ut quis odio.
-        Phasellus gravida semper nisl fringilla pharetra. Curabitur molestie
-        consectetur eros. Nam ut ex metus. Praesent tristique consequat nisi,
-        vitae aliquam odio tristique in. Nulla nec nunc ut elit interdum cursus.
-        Morbi facilisis ligula lacus. Vivamus tincidunt aliquet nunc, at
-        placerat elit pretium nec. Nulla facilisi. Vivamus cursus feugiat sem
-        sed tincidunt. Sed convallis nec felis mattis eleifend.
-      </p>
-      <p className="pb-1">
-        Proin ut tempus dolor. Proin ultricies pharetra laoreet. In id tellus
-        luctus mauris fringilla fringilla. Morbi dapibus purus arcu, at aliquet
-        sapien luctus nec. Nunc neque enim, ultricies eu justo at, egestas
-        tempor urna. Fusce consectetur venenatis ex vel vehicula. Ut gravida
-        feugiat odio egestas ornare. In interdum condimentum massa, non pretium
-        ex cursus vitae. Fusce sit amet tortor id magna efficitur efficitur vel
-        non urna. Nam sagittis, mauris at malesuada vestibulum, mauris nisi
-        viverra diam, ac pretium libero nisl id mi. Nulla sagittis sapien in
-        lacus gravida, vel convallis purus fringilla. Fusce interdum lacus at
-        eros egestas placerat. Nunc tellus augue, elementum et iaculis ac,
-        luctus et velit. Sed ac turpis a diam consequat imperdiet eleifend eu
-        nulla. Ut viverra enim semper consectetur pulvinar. Sed sodales mollis
-        sem tempor posuere.
-      </p>
-      <p className="pb-1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-        porttitor lectus ex, sit amet condimentum magna volutpat non. In
-        tristique eget turpis vel suscipit. Aenean pellentesque eu risus in
-        porta. Duis hendrerit quam in odio vestibulum elementum ac vel nibh.
-        Phasellus lobortis, neque quis malesuada maximus, neque est pharetra
-        ante, semper ultricies nunc ante sit amet eros. Suspendisse risus
-        ligula, porta in finibus id, gravida at odio. Phasellus quis magna nisi.
-        Etiam ac consectetur quam, ut vulputate neque. Nullam pretium mattis ex
-        eu accumsan. Integer non laoreet velit. Fusce commodo fermentum nisi,
-        eget dictum sapien accumsan quis. Cras finibus, quam sit amet vulputate
-        molestie, magna massa lobortis mi, eget tincidunt odio felis ut risus.
-        In euismod ex at mauris semper, at scelerisque lacus auctor. Mauris eget
-        augue et libero euismod dignissim.
-      </p>
-      <p className="pb-1">
-        Proin malesuada mauris sed urna interdum, at sollicitudin velit
-        sagittis. Duis imperdiet dolor erat, eget sollicitudin felis blandit
-        eget. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. Nullam at justo vitae risus luctus
-        efficitur. Cras nec eros eu quam elementum consectetur ut quis odio.
-        Phasellus gravida semper nisl fringilla pharetra. Curabitur molestie
-        consectetur eros. Nam ut ex metus. Praesent tristique consequat nisi,
-        vitae aliquam odio tristique in. Nulla nec nunc ut elit interdum cursus.
-        Morbi facilisis ligula lacus. Vivamus tincidunt aliquet nunc, at
-        placerat elit pretium nec. Nulla facilisi. Vivamus cursus feugiat sem
-        sed tincidunt. Sed convallis nec felis mattis eleifend.
-      </p>
-      <p className="pb-1">
-        Proin ut tempus dolor. Proin ultricies pharetra laoreet. In id tellus
-        luctus mauris fringilla fringilla. Morbi dapibus purus arcu, at aliquet
-        sapien luctus nec. Nunc neque enim, ultricies eu justo at, egestas
-        tempor urna. Fusce consectetur venenatis ex vel vehicula. Ut gravida
-        feugiat odio egestas ornare. In interdum condimentum massa, non pretium
-        ex cursus vitae. Fusce sit amet tortor id magna efficitur efficitur vel
-        non urna. Nam sagittis, mauris at malesuada vestibulum, mauris nisi
-        viverra diam, ac pretium libero nisl id mi. Nulla sagittis sapien in
-        lacus gravida, vel convallis purus fringilla. Fusce interdum lacus at
-        eros egestas placerat. Nunc tellus augue, elementum et iaculis ac,
-        luctus et velit. Sed ac turpis a diam consequat imperdiet eleifend eu
-        nulla. Ut viverra enim semper consectetur pulvinar. Sed sodales mollis
-        sem tempor posuere.
-      </p>
+      <section className="relative mb-8 rounded-lg bg-gradient-to-r from-primary-800 to-primary-600 px-8 py-16 pt-14 text-center text-white shadow-md">
+        <Image
+          className="absolute bottom-0 right-8 h-72 w-auto"
+          src="/Satoru-Gojo-v.png"
+          width={150}
+          height={300}
+          alt="Anime intro image of Gojo Satoru"
+        />
+        <div className="mx-auto max-w-lg">
+          <h1 className="mb-4 text-4xl font-bold">
+            Dive Into the World of Anime
+          </h1>
+          <p className="mb-6 text-lg">
+            Explore, track, and discover your favorite anime like never before.
+            Join a community of anime enthusiasts and create your personalized
+            anime journey today.
+          </p>
+          <Button variant="primaryReverse" href="/signup">
+            Sign Up Now
+          </Button>
+        </div>
+      </section>
+
+      <SearchBar />
+      <div className="space-y-8">
+        <SearchCategoriesPreview
+          number={5}
+          title="Trending now"
+          href={"/search/anime/trending"}
+          results={trendingNow}
+        />
+
+        <SearchCategoriesPreview
+          number={5}
+          title="Popular this season"
+          href={"/search/anime/this-season"}
+          results={popularThisSeason}
+        />
+
+        <SearchCategoriesPreview
+          number={5}
+          title="Upcoming next season"
+          href={"/search/anime/next-season"}
+          results={popularNextSeason}
+        />
+
+        <SearchCategoriesPreview
+          number={5}
+          title="All time popular"
+          href={"/search/anime/popular"}
+          results={allTimePopular}
+        />
+      </div>
     </div>
   );
 }

@@ -46,7 +46,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
             <Image
               src={anime.coverImage.large}
               alt={anime.title.english || anime.title.romaji}
-              sizes="(min-width: 768px) 16rem"
+              sizes="(min-width: 768px) 20rem"
               fill
               className="rounded-t-lg object-cover"
             />

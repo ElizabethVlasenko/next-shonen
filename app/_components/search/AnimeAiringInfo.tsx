@@ -34,7 +34,7 @@ export default function AnimeAiringInfo({
 
     return (
       <>
-        {startDate.year} - {endDate.year}
+        {season} {seasonYear}
       </>
     );
   }
