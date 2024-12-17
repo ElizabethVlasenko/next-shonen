@@ -5,7 +5,7 @@ import {
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/16/solid";
-import { useDarkMode } from "../../_lib/Context/DarkModeContext";
+import { Theme, useDarkMode } from "../../_lib/Context/DarkModeContext";
 import { useEffect, useState } from "react";
 
 type DarkThemeHandlerProps = {
@@ -17,22 +17,25 @@ export default function DarkThemeHandler({
   type,
   className,
 }: DarkThemeHandlerProps) {
-  const { isDarkMode, toggleDarkMode, setDarkMode } = useDarkMode();
+  const { theme, toggleDarkMode, setDarkMode } = useDarkMode();
   const [domLoaded, setDomLoaded] = useState(false);
 
   useEffect(() => {
     setDomLoaded(true);
   }, []);
 
-  let systemTheme = false;
+  let systemTheme = "light" as Theme;
   if (typeof window !== "undefined") {
-    systemTheme = window.matchMedia("(prefers-color-scheme: dark").matches;
+    systemTheme =
+      window.matchMedia("(prefers-color-scheme: dark").matches === true
+        ? "dark"
+        : "light";
   }
 
   if (type === "toggle") {
     return (
       <div className="h-6 w-6">
-        {isDarkMode && domLoaded ? (
+        {theme && domLoaded ? (
           <button onClick={toggleDarkMode}>
             <SunIcon
               className={`h-6 w-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}
@@ -55,13 +58,16 @@ export default function DarkThemeHandler({
         <h3 className="mb-3 font-serif text-primary-50">Site Theme</h3>
 
         <div className="flex space-x-4">
-          <ThemeButton label="Dark Theme" changeTheme={() => setDarkMode(true)}>
+          <ThemeButton
+            label="Dark Theme"
+            changeTheme={() => setDarkMode("dark")}
+          >
             <MoonIcon className="h-6 w-6 text-primary-50 transition-colors group-hover:text-accent-200" />
           </ThemeButton>
 
           <ThemeButton
             label="Light Theme"
-            changeTheme={() => setDarkMode(false)}
+            changeTheme={() => setDarkMode("light")}
           >
             <SunIcon className="h-6 w-6 text-primary-50 transition-colors group-hover:text-accent-200" />
           </ThemeButton>

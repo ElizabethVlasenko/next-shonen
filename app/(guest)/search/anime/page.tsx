@@ -20,6 +20,7 @@ export default async function page({ searchParams }: PageProps) {
   const currSearchParams = (await searchParams) || {};
 
   const searchResult = {};
+  console.log(searchResult);
   if (Object.keys(currSearchParams).length !== 0)
     console.log("TODO: get search result with next params", currSearchParams);
 

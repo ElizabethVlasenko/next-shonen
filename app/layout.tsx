@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Kanit, Nunito } from "next/font/google";
 
+import { cookies } from "next/headers";
 import ApolloProviderWrapper from "./_components/ApolloProviderWrapper";
 import MainFooter from "./_components/footer/MainFooter";
 import GuestHeader from "./_components/header/GuestHeader";
 import MainHeader from "./_components/header/MainHeader";
 import Wrapper from "./_components/Wrapper";
-import "./globals.css";
 import { DarkModeProvider } from "./_lib/Context/DarkModeContext";
 import { SearchProvider } from "./_lib/Context/SearchContext";
+import "./globals.css";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -27,17 +28,20 @@ export const metadata: Metadata = {
     "Discover and track your favorite anime effortlessly with our sleek and modern platform. ",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme");
+
   const isLoggedIn = true;
 
   return (
     <html lang="en">
       <body
-        className={`${nunito.variable} ${kanit.variable} h-dvh bg-transparent antialiased`}
+        className={`${nunito.variable} ${kanit.variable} h-dvh bg-transparent antialiased ${theme?.value === "dark" ? "dark" : ""}`}
       >
         <ApolloProviderWrapper>
           <SearchProvider>

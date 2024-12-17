@@ -3,10 +3,12 @@
 import { createContext, ReactNode, useContext, useEffect } from "react";
 import useLocalStorageState from "../hooks/useLocalStorageState";
 
+export type Theme = "light" | "dark";
+
 type DarkModeContextProps = {
-  isDarkMode: boolean;
+  theme: Theme;
   toggleDarkMode: () => void;
-  setDarkMode: (value: boolean) => void;
+  setDarkMode: (value: Theme) => void;
 };
 
 const DarkModeContext = createContext<DarkModeContextProps | null>(null);
@@ -16,39 +18,59 @@ type DarkModeContextProviderProps = {
 };
 
 function DarkModeProvider({ children }: DarkModeContextProviderProps) {
-  let systemTheme = false;
-  if (typeof window !== "undefined") {
-    systemTheme = window.matchMedia("(prefers-color-scheme: dark").matches;
+  let systemTheme = "light" as Theme;
+
+  async function handleCookieThemeSwitch(newTheme: Theme) {
+    try {
+      const response = await fetch("/api/set-theme", {
+        // Await the fetch call
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ theme: newTheme }),
+      });
+
+      if (response.ok) {
+        setTheme(newTheme);
+      } else {
+        console.error("Failed to update theme:", response.status);
+      }
+    } catch (error) {
+      console.error("Error updating theme:", error);
+    }
   }
 
-  const [isDarkMode, setIsDarkMode] = useLocalStorageState(
-    "isDarkMode",
-    systemTheme,
-  );
+  if (typeof window !== "undefined") {
+    systemTheme = window.matchMedia("(prefers-color-scheme: dark").matches
+      ? "dark"
+      : "light";
+  }
+
+  const [theme, setTheme] = useLocalStorageState("theme", systemTheme);
 
   useEffect(
     function () {
-      if (isDarkMode) {
+      if (theme === "dark") {
         document.body.classList.add("dark");
       } else {
         document.body.classList.remove("dark");
       }
     },
-    [isDarkMode],
+    [theme],
   );
 
   function toggleDarkMode() {
-    setIsDarkMode((isDark) => !isDark);
+    const newTheme = theme === "light" ? "dark" : "light";
+    handleCookieThemeSwitch(newTheme);
   }
 
-  function setDarkMode(value: boolean) {
-    setIsDarkMode(value);
+  function setDarkMode(value: Theme) {
+    handleCookieThemeSwitch(value);
   }
 
   return (
-    <DarkModeContext.Provider
-      value={{ isDarkMode, toggleDarkMode, setDarkMode }}
-    >
+    <DarkModeContext.Provider value={{ theme, toggleDarkMode, setDarkMode }}>
       {children}
     </DarkModeContext.Provider>
   );
