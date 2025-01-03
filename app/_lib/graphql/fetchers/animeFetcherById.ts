@@ -10,9 +10,6 @@ export const fetchAnimeById = async (variables: SearchAnimeByIdVariables) => {
       fetchPolicy: "cache-first",
     });
 
-    console.log("Data:", data.Page);
-    console.log("Cache:", client.cache.extract());
-
     return data.Media.title as Title;
   } catch (error) {
     console.error("Error fetching anime:", error);

@@ -34,10 +34,10 @@ export const fetchAnimeTopChart = async () => {
   }
   const nextSeason = getSeasonOfTheDate(add(new Date(), { months: 3 }));
 
-  console.log(
-    "current season: " + currentSeason + " " + new Date().getFullYear(),
-  );
-  console.log("next season: " + nextSeason + " " + nextSeasonYear);
+  // console.log(
+  //   "current season: " + currentSeason + " " + new Date().getFullYear(),
+  // );
+  // console.log("next season: " + nextSeason + " " + nextSeasonYear);
 
   try {
     const { data } = await client.query({

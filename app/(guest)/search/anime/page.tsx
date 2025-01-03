@@ -1,28 +1,32 @@
 import SearchBar from "../../../_components/search/SearchBar";
 import SearchCategoriesPreview from "../../../_components/search/SearchCategoriesPreview";
-import { fetchAnimeTopChart } from "../../../_lib/graphql/fetchers/animeFetcher";
+import SearchResultPreview from "../../../_components/search/SearchResultPreview";
+import {
+  fetchAnime,
+  fetchAnimeTopChart,
+} from "../../../_lib/graphql/fetchers/animeFetcher";
+import { SearchResultAnimeMedia } from "../../../_lib/graphql/types/anime";
 
 type PageProps = {
   searchParams?: { [key: string]: string | string[] };
 };
 
 export default async function page({ searchParams }: PageProps) {
-  // const variables: SearchAnimeVariables = {
-  //   isAdult: false,
-  //   type: "ANIME",
-  //   sort: ["TRENDING_DESC"],
-  //   page: 1,
-  //   perPage: 5,
-  // };
-
-  // const data = await fetchAnime(variables);
-
   const currSearchParams = (await searchParams) || {};
 
-  const searchResult = {};
-  console.log(searchResult);
-  if (Object.keys(currSearchParams).length !== 0)
-    console.log("TODO: get search result with next params", currSearchParams);
+  let searchResult: SearchResultAnimeMedia[] = [];
+  if (Object.keys(currSearchParams).length !== 0) {
+    const searchResultData = await fetchAnime({
+      isAdult: false,
+      type: "ANIME",
+      sort: ["POPULARITY_DESC"],
+      page: 1,
+      perPage: 20,
+      ...currSearchParams,
+    });
+    searchResult = searchResultData.media;
+    console.log("searchResult", searchResult);
+  }
 
   const data = await fetchAnimeTopChart();
 
@@ -68,7 +72,7 @@ export default async function page({ searchParams }: PageProps) {
           />
         </div>
       ) : (
-        <p>result </p>
+        <SearchResultPreview results={searchResult} />
       )}
     </div>
   );
