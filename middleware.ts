@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
   const theme = request.cookies.get("theme")?.value || "light";
-  console.log("middleware theme", request.cookies.get("theme")?.value);
+  console.log("middleware: theme", request.cookies.get("theme")?.value);
   response.cookies.set("theme", theme, { path: "/" });
 
   //redirect on the anime preview page based on the preferred title language
@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
     const id = segments[2];
     const slug = segments[3];
 
-    console.log("current title slug", slug);
+    console.log("middleware: current title slug", slug);
 
     // Generate the appropriate slug for the language
 
@@ -41,7 +41,7 @@ export async function middleware(request: NextRequest) {
 
     switch (userLanguage) {
       case "english":
-        preferredTitle = titles?.english;
+        preferredTitle = titles?.english || titles?.romaji;
         break;
       case "native":
       case "romaji":
@@ -58,7 +58,7 @@ export async function middleware(request: NextRequest) {
 
     const redirectSlug = generateSlug(preferredTitle || ""); // Handle potential undefined
 
-    console.log("desired title slug", redirectSlug);
+    console.log("middleware: desired title slug", redirectSlug);
 
     // Redirect to the language-specific page if necessary
     if (slug !== redirectSlug) {

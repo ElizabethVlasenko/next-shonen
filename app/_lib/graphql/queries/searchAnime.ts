@@ -425,7 +425,7 @@ export const SEARCH_ANIME_TOP_CHART = gql`
 
 export const SEARCH_ANIME_BY_ID = gql`
   query Query($mediaId: Int) {
-    Media(id: $mediaId) {
+    Media(id: $mediaId, type: ANIME) {
       title {
         english
         native
