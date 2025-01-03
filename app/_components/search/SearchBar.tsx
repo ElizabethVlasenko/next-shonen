@@ -31,6 +31,11 @@ export default function SearchBar() {
     //gets the current search parameters or an empty string
     if (name !== "genres") {
       const newSearchParams = new URLSearchParams(searchParams);
+      if (value === "") {
+        newSearchParams.delete(name);
+        router.push(`/search/anime?${newSearchParams.toString()}`);
+        return;
+      }
       newSearchParams.set(name, value);
       router.push(`/search/anime?${newSearchParams.toString()}`);
       return;
@@ -68,13 +73,13 @@ export default function SearchBar() {
           </h4>
           <select
             name="genres"
-            defaultValue={searchParams.get("genres") || ""}
+            defaultValue={searchParams.get("genres") || "Any"}
             className="w-52 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
             {genres && cleanTags && (
               <>
-                <option value="none" selected disabled hidden>
+                <option value="null" hidden>
                   Any
                 </option>
                 <optgroup label="Genres" className="text-sm font-bold">
@@ -143,11 +148,11 @@ export default function SearchBar() {
           </h4>
           <select
             name="year"
-            defaultValue={searchParams.get("year") || ""}
+            defaultValue={searchParams.get("year") || "Any"}
             className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
-            <option value="none" selected disabled hidden>
+            <option value="null" hidden>
               Any
             </option>
             {years.map((year) => (
@@ -165,11 +170,11 @@ export default function SearchBar() {
           </h4>
           <select
             name="season"
-            defaultValue={searchParams.get("season") || ""}
+            defaultValue={searchParams.get("season") || "Any"}
             className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
-            <option value="none" selected disabled hidden>
+            <option value="null" hidden>
               Any
             </option>
             {seasons.map((season) => (
@@ -187,11 +192,11 @@ export default function SearchBar() {
           </h4>
           <select
             name="format"
-            defaultValue={searchParams.get("format") || ""}
+            defaultValue={searchParams.get("format") || "Any"}
             className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
-            <option value="none" selected disabled hidden>
+            <option value="null" hidden>
               Any
             </option>
             {formats.map((format) => (

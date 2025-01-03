@@ -16,6 +16,11 @@ export default async function page({ searchParams }: PageProps) {
 
   let searchResult: SearchResultAnimeMedia[] = [];
   if (Object.keys(currSearchParams).length !== 0) {
+    //min 3 character search
+    if (currSearchParams.search?.length < 3) {
+      delete currSearchParams?.search;
+    }
+    console.log(currSearchParams);
     const searchResultData = await fetchAnime({
       isAdult: false,
       type: "ANIME",
@@ -25,7 +30,6 @@ export default async function page({ searchParams }: PageProps) {
       ...currSearchParams,
     });
     searchResult = searchResultData.media;
-    console.log("searchResult", searchResult);
   }
 
   const data = await fetchAnimeTopChart();
