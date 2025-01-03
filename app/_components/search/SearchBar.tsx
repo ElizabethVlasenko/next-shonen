@@ -19,6 +19,7 @@ export default function SearchBar() {
   const activeGenres = [""];
 
   const { genres, tags } = searchState;
+  const cleanTags = tags.filter((tag) => tag.isAdult === false);
 
   const handleSearchParams = (
     event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
@@ -71,8 +72,11 @@ export default function SearchBar() {
             className="w-52 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
-            {genres && tags && (
+            {genres && cleanTags && (
               <>
+                <option value="none" selected disabled hidden>
+                  Any
+                </option>
                 <optgroup label="Genres" className="text-sm font-bold">
                   {genres.map((genre) => (
                     <option
@@ -89,7 +93,7 @@ export default function SearchBar() {
                   ))}
                 </optgroup>
                 <optgroup label="Tags">
-                  {tags.map((tag) => (
+                  {cleanTags.map((tag) => (
                     <option
                       key={tag.name}
                       value={tag.name}
@@ -108,6 +112,30 @@ export default function SearchBar() {
           </select>
         </div>
 
+        {/* <div>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+            Genres
+          </h4>
+          <MultiselectDropDown
+            formFieldName="Genres"
+            name="genres"
+            options={genres}
+            handleChange={handleSearchParams}
+          />
+        </div> */}
+        {/* 
+        <div>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+            Genres
+          </h4>
+          <MultiselectDropDown
+            formFieldName="Tags"
+            name="tags"
+            options={cleanTags}
+            handleChange={handleSearchParams}
+          />
+        </div> */}
+
         {/* Year */}
         <div>
           <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
@@ -119,7 +147,9 @@ export default function SearchBar() {
             className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
-            <option value="">Any Year</option>
+            <option value="none" selected disabled hidden>
+              Any
+            </option>
             {years.map((year) => (
               <option key={year} value={year}>
                 {year}
@@ -139,7 +169,9 @@ export default function SearchBar() {
             className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
-            <option value="">Any Season</option>
+            <option value="none" selected disabled hidden>
+              Any
+            </option>
             {seasons.map((season) => (
               <option key={season} value={season}>
                 {season}
@@ -159,7 +191,9 @@ export default function SearchBar() {
             className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
-            <option value="">Any Format</option>
+            <option value="none" selected disabled hidden>
+              Any
+            </option>
             {formats.map((format) => (
               <option key={format} value={format}>
                 {format}
