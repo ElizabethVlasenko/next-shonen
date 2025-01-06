@@ -33,7 +33,9 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
   }
 
   return (
-    <Link href={`/anime/${anime.id}/${generateSlug(anime.title.english)}`}>
+    <Link
+      href={`/anime/${anime.id}/${generateSlug(anime.title.english || anime.title.romaji)}`}
+    >
       <li
         className={`relative h-auto`}
         key={anime.id}

@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
     const pathname = url.pathname;
 
     // Check if the URL matches the anime page pattern
-    const animeRegex = /^\/anime\/\d+\/.+$/;
+    const animeRegex = /^\/anime\/\d+(\/.+)?$/;
     if (!animeRegex.test(pathname)) {
       return NextResponse.next(); // Allow other routes to pass through
     }
@@ -28,6 +28,7 @@ export async function middleware(request: NextRequest) {
 
     // Parse the ID and slug from the URL
     const segments = pathname.split("/");
+    console.log("segments", segments);
     const id = segments[2];
     const slug = segments[3];
 
