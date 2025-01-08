@@ -16,8 +16,6 @@ export default async function page({ params }: PageProps) {
   const textColor = getTextColorForBG(animePrimaryColor);
   const hasBanner = anime.bannerImage !== null;
 
-  console.log(anime);
-
   return (
     <div>
       {/* Banner */}
@@ -27,10 +25,9 @@ export default async function page({ params }: PageProps) {
           <Image
             src={anime.bannerImage}
             alt={`${anime.title.english || anime.title.native} banner`}
-            layout="fill"
-            objectFit="cover"
             priority
-            className="select-none"
+            fill
+            className="select-none object-cover object-center"
           />
         ) : (
           <div
@@ -40,12 +37,13 @@ export default async function page({ params }: PageProps) {
             }}
           ></div>
         )}
-        <div className="absolute bottom-4 left-4 z-[2] text-white">
+        <div className="absolute bottom-0 left-0 z-[2] p-8 pb-7 text-white">
           <h1 className="text-2xl font-bold md:text-4xl">
             {anime.title.english || anime.title.romaji}
           </h1>
           <p className="mt-1 text-sm italic md:text-base">
-            {anime.title.romaji ? anime.title.romaji + "," : null}{" "}
+            {anime.title.romaji ? anime.title.romaji + "," : null}
+            {anime.title.romaji.length > 50 ? <br /> : " "}
             {anime.title.native}
           </p>
         </div>
@@ -60,7 +58,8 @@ export default async function page({ params }: PageProps) {
             alt={anime.title.english || anime.title.native}
             width={300}
             height={450}
-            className="select-none rounded-lg shadow-md"
+            style={{ height: "450px", width: "300px" }}
+            className="select-none rounded-lg object-cover shadow-md"
           />
           <StatusTag
             type="tag"
@@ -94,7 +93,8 @@ export default async function page({ params }: PageProps) {
           {/* Additional Info */}
           <div className="space-y-2">
             <p className="lowercase">
-              <strong className="normal-case">Status:</strong> {anime.status}
+              <strong className="normal-case">Status:</strong>{" "}
+              {anime.status.replaceAll("_", " ")}
             </p>
             <p>
               <strong>Episodes:</strong> {anime.episodes || "N/A"}
