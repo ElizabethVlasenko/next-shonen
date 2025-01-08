@@ -44,8 +44,10 @@ export default function StatusTag({
         />
       )}
       {type === "tag" && (
-        <span className={`rounded-md px-2 py-1 text-sm font-semibold ${tag}`}>
-          {status}
+        <span
+          className={`select-none rounded-md px-2 py-1 text-sm font-semibold ${tag}`}
+        >
+          {status.replaceAll("_", " ")}
         </span>
       )}
     </div>

@@ -102,14 +102,16 @@ export type SearchAnimeTopChart = {
   allTimePopular: SearchResultAnime;
 };
 
+export type coverImage = {
+  extraLarge: string;
+  large: string;
+  color: string;
+};
+
 export type SearchResultAnimeMedia = {
   id: number;
   title: Title;
-  coverImage: {
-    extraLarge: string;
-    large: string;
-    color: string;
-  };
+  coverImage: coverImage;
   startDate: DateYMD;
   endDate: DateYMD;
   bannerImage: string;
@@ -132,15 +134,17 @@ export type SearchResultAnimeMedia = {
     id: number;
     status: MediaStatus;
   };
-  studios: {
-    edges: {
-      isMain: boolean;
-      node: {
-        id: number;
-        name: string;
-      };
-    }[];
-  };
+  studios: Studios;
+};
+
+export type Studios = {
+  edges: {
+    isMain: boolean;
+    node: {
+      id: number;
+      name: string;
+    };
+  }[];
 };
 
 export type SearchResultAnime = {
@@ -152,4 +156,17 @@ export type SearchResultAnime = {
     hasNextPage: boolean;
   };
   media: SearchResultAnimeMedia[];
+};
+
+export type AnimeInfo = {
+  id: string;
+  title: Title;
+  coverImage: coverImage;
+  bannerImage: string;
+  description: string;
+  genres: string[];
+  episodes: number;
+  status: MediaStatus;
+  averageScore: number;
+  studios: Studios;
 };

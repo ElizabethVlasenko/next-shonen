@@ -423,7 +423,7 @@ export const SEARCH_ANIME_TOP_CHART = gql`
   }
 `;
 
-export const SEARCH_ANIME_BY_ID = gql`
+export const SEARCH_ANIME_TITLE_BY_ID = gql`
   query Query($mediaId: Int) {
     Media(id: $mediaId, type: ANIME) {
       title {
@@ -431,6 +431,37 @@ export const SEARCH_ANIME_BY_ID = gql`
         native
         romaji
         userPreferred
+      }
+    }
+  }
+`;
+
+export const SEARCH_ANIME_BY_ID = gql`
+  query Query($mediaId: Int) {
+    Media(id: $mediaId, type: ANIME) {
+      id
+      title {
+        english
+        native
+        romaji
+      }
+      coverImage {
+        extraLarge
+        color
+        large
+      }
+      bannerImage
+      description
+      genres
+      episodes
+      status
+      averageScore
+      studios {
+        edges {
+          node {
+            name
+          }
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { fetchAnimeById } from "./app/_lib/graphql/fetchers/animeFetcherById";
+import { fetchAnimeTitleById } from "./app/_lib/graphql/fetchers/animeFetcherById";
 import { generateSlug } from "./app/_lib/helpers/slugGenerator";
 
 export async function middleware(request: NextRequest) {
@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
 
     // Generate the appropriate slug for the language
 
-    const titles = await fetchAnimeById({ mediaId: +id });
+    const titles = await fetchAnimeTitleById({ mediaId: +id });
 
     let preferredTitle: string | undefined;
 
