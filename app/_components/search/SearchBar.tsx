@@ -3,6 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useSearchContext } from "../../_lib/Context/SearchContext";
 import { ChangeEvent } from "react";
+import ContentContainer from "../ui/ContentContainer";
 
 const years = Array.from({ length: 86 }, (_, i) => 2025 - i);
 const formats = ["TV Show", "Movie", "OVA", "Special", "ONA", "Music"];
@@ -48,13 +49,11 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="mb-8 rounded-lg bg-white p-8 pt-5 text-primary-700 shadow-md dark:bg-primary-900 dark:text-primary-50">
+    <ContentContainer className="mb-8">
       <div className="flex gap-4">
         {/* Search Input */}
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Search
-          </h4>
+          <h4 className="mb-2 text-sm font-semibold">Search</h4>
           <input
             name="search"
             onChange={handleSearchParams}
@@ -68,9 +67,7 @@ export default function SearchBar() {
         {/* Genres */}
 
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Genres
-          </h4>
+          <h4 className="mb-2 text-sm font-semibold">Genres</h4>
           <select
             name="genres"
             defaultValue={searchParams.get("genres") || "Any"}
@@ -117,35 +114,9 @@ export default function SearchBar() {
           </select>
         </div>
 
-        {/* <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Genres
-          </h4>
-          <MultiselectDropDown
-            formFieldName="Genres"
-            name="genres"
-            options={genres}
-            handleChange={handleSearchParams}
-          />
-        </div> */}
-        {/* 
-        <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Genres
-          </h4>
-          <MultiselectDropDown
-            formFieldName="Tags"
-            name="tags"
-            options={cleanTags}
-            handleChange={handleSearchParams}
-          />
-        </div> */}
-
         {/* Year */}
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Year
-          </h4>
+          <h4 className="mb-2 text-sm font-semibold">Year</h4>
           <select
             name="year"
             defaultValue={searchParams.get("year") || "Any"}
@@ -165,9 +136,7 @@ export default function SearchBar() {
 
         {/* Season */}
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Season
-          </h4>
+          <h4 className="mb-2 text-sm font-semibold">Season</h4>
           <select
             name="season"
             defaultValue={searchParams.get("season") || "Any"}
@@ -187,9 +156,7 @@ export default function SearchBar() {
 
         {/* Format */}
         <div>
-          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Format
-          </h4>
+          <h4 className="mb-2 text-sm font-semibold">Format</h4>
           <select
             name="format"
             defaultValue={searchParams.get("format") || "Any"}
@@ -207,6 +174,6 @@ export default function SearchBar() {
           </select>
         </div>
       </div>
-    </div>
+    </ContentContainer>
   );
 }

@@ -42,7 +42,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
         onMouseEnter={() => setIsShowMoreInfo(true)}
         onMouseLeave={() => setIsShowMoreInfo(false)}
       >
-        <div className="relative flex h-full w-48 min-w-48 flex-col items-center overflow-hidden rounded-lg bg-primary-50 text-primary-800 transition hover:shadow-lg dark:bg-primary-800 dark:text-primary-50">
+        <div className="relative flex h-full w-48 min-w-48 flex-col items-center overflow-hidden rounded-lg transition hover:shadow-lg">
           {/* image */}
           <div className="relative mb-14 h-64 w-48 object-cover shadow-sm">
             <Image
