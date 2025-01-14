@@ -438,31 +438,292 @@ export const SEARCH_ANIME_TITLE_BY_ID = gql`
 
 export const SEARCH_ANIME_BY_ID = gql`
   query Query($mediaId: Int) {
-    Media(id: $mediaId, type: ANIME) {
+    Media(id: $mediaId) {
       id
       title {
+        userPreferred
+        romaji
         english
         native
-        romaji
       }
       coverImage {
         extraLarge
-        color
         large
       }
       bannerImage
+      startDate {
+        year
+        month
+        day
+      }
+      endDate {
+        year
+        month
+        day
+      }
       description
-      genres
+      season
+      seasonYear
+      type
+      format
+      status(version: 2)
       episodes
-      status
+      duration
+      chapters
+      volumes
+      genres
+      synonyms
+      source(version: 3)
+      isAdult
+      isLocked
+      meanScore
       averageScore
+      popularity
+      favourites
+      isFavouriteBlocked
+      hashtag
+      countryOfOrigin
+      isLicensed
+      isFavourite
+      isRecommendationBlocked
+      isReviewBlocked
+      nextAiringEpisode {
+        airingAt
+        timeUntilAiring
+        episode
+      }
+      relations {
+        edges {
+          id
+          relationType(version: 2)
+          node {
+            id
+            title {
+              english
+              romaji
+              native
+              userPreferred
+            }
+            format
+            type
+            status(version: 2)
+            bannerImage
+            coverImage {
+              large
+              extraLarge
+              color
+            }
+          }
+        }
+      }
+      characterPreview: characters(sort: [ROLE, RELEVANCE, ID]) {
+        edges {
+          id
+          role
+          name
+          voiceActors(sort: [RELEVANCE, ID]) {
+            name {
+              full
+            }
+            languageV2
+            image {
+              medium
+            }
+          }
+          node {
+            name {
+              full
+            }
+            image {
+              medium
+            }
+          }
+        }
+      }
+      staffPreview: staff(sort: [RELEVANCE, ID]) {
+        edges {
+          id
+          role
+          node {
+            id
+            name {
+              full
+            }
+            languageV2
+            image {
+              medium
+            }
+          }
+        }
+      }
       studios {
         edges {
+          isMain
           node {
+            id
             name
           }
+        }
+      }
+      reviewPreview: reviews(perPage: 2, sort: [RATING_DESC, ID]) {
+        pageInfo {
+          total
+        }
+        nodes {
+          id
+          summary
+          rating
+          ratingAmount
+          user {
+            id
+            name
+            avatar {
+              large
+            }
+          }
+        }
+      }
+      recommendations(perPage: 7, sort: [RATING_DESC, ID]) {
+        pageInfo {
+          total
+        }
+        nodes {
+          id
+          rating
+          userRating
+          mediaRecommendation {
+            id
+            title {
+              english
+              romaji
+              native
+              userPreferred
+            }
+            format
+            type
+            status(version: 2)
+            bannerImage
+            coverImage {
+              medium
+            }
+          }
+          user {
+            id
+            name
+            avatar {
+              large
+            }
+          }
+        }
+      }
+      externalLinks {
+        id
+        site
+        url
+        type
+        language
+        color
+        icon
+        notes
+        isDisabled
+      }
+      streamingEpisodes {
+        site
+        title
+        thumbnail
+        url
+      }
+      trailer {
+        id
+        site
+      }
+      rankings {
+        id
+        rank
+        type
+        format
+        year
+        season
+        allTime
+        context
+      }
+      tags {
+        id
+        name
+        description
+        rank
+        isMediaSpoiler
+        isGeneralSpoiler
+        userId
+      }
+      mediaListEntry {
+        id
+        status
+        score
+      }
+      stats {
+        statusDistribution {
+          status
+          amount
+        }
+        scoreDistribution {
+          score
+          amount
         }
       }
     }
   }
 `;
+
+// export const SEARCH_ANIME_BY_ID = gql`
+//   query Query($mediaId: Int) {
+//     Media(id: $mediaId, type: ANIME) {
+//       id
+//       title {
+//         english
+//         native
+//         romaji
+//       }
+//       coverImage {
+//         extraLarge
+//         color
+//         large
+//       }
+//       bannerImage
+//       description
+//       genres
+//       episodes
+//       status
+//       averageScore
+//       studios {
+//         edges {
+//           node {
+//             name
+//           }
+//         }
+//       }
+//       characters(sort: [ROLE]) {
+//         edges {
+//           voiceActors {
+//             image {
+//               medium
+//             }
+//             name {
+//               full
+//             }
+//             languageV2
+//           }
+//           role
+//           node {
+//             name {
+//               full
+//             }
+//             image {
+//               medium
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;

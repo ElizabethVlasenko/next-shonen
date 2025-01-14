@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "s4.anilist.co",
         port: "",
-        pathname: "/file/anilistcdn/media/**",
+        pathname: "/file/anilistcdn/**/**",
       },
     ],
   },

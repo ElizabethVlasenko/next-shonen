@@ -158,15 +158,222 @@ export type SearchResultAnime = {
   media: SearchResultAnimeMedia[];
 };
 
+export type Character = {
+  image: {
+    medium: string;
+  };
+  name: {
+    full: string;
+  };
+};
+
+export type voiceActor = {
+  image: {
+    medium: string;
+  };
+  name: {
+    full: string;
+  };
+  languageV2: string;
+};
+
+// export type AnimeInfo = {
+//   id: string;
+//   title: Title;
+//   coverImage: coverImage;
+//   bannerImage: string;
+//   description: string;
+//   genres: string[];
+//   episodes: number;
+//   status: MediaStatus;
+//   averageScore: number;
+//   studios: Studios;
+//   characters: {
+//     edges: {
+//       voiceActors: voiceActor[];
+//       role: string;
+//       node: Character;
+//     }[];
+//   };
+// };
+
 export type AnimeInfo = {
-  id: string;
+  id: number;
   title: Title;
   coverImage: coverImage;
   bannerImage: string;
+  startDate: DateYMD;
+  endDate: DateYMD;
   description: string;
-  genres: string[];
-  episodes: number;
+  season: MediaSeason;
+  seasonYear: number;
+  type: MediaType;
+  format: MediaFormat;
   status: MediaStatus;
+  episodes: number;
+  duration: number;
+  chapters: number;
+  volumes: number;
+  genres: string[];
+  synonyms: string[];
+  source: MediaSource;
+  isAdult: boolean;
+  isLocked: boolean;
+  meanScore: number;
   averageScore: number;
+  popularity: number;
+  favourites: number;
+  isFavouriteBlocked: boolean;
+  hashtag: string;
+  countryOfOrigin: string;
+  isLicensed: boolean;
+  isFavourite: boolean;
+  isRecommendationBlocked: boolean;
+  isReviewBlocked: boolean;
+  nextAiringEpisode: NextAiringEpisode;
+  relations: {
+    edges: {
+      id: number;
+      relationType: string;
+      node: {
+        id: number;
+        title: Title;
+        format: MediaFormat;
+        type: MediaType;
+        status: MediaStatus;
+        bannerImage: string;
+        coverImage: coverImage;
+      };
+    }[];
+  };
+  characterPreview: {
+    edges: {
+      id: number;
+      role: string;
+      name: string;
+      voiceActors: voiceActor[];
+      node: Character;
+    }[];
+  };
+  staffPreview: {
+    edges: {
+      id: number;
+      role: string;
+      node: {
+        id: number;
+        name: {
+          full: string;
+        };
+        languageV2: string;
+        image: {
+          large: string;
+        };
+      };
+    };
+  };
   studios: Studios;
+  reviewPreview: {
+    pageInfo: {
+      total: number;
+    };
+    nodes: {
+      id: number;
+      summary: string;
+      rating: number;
+      ratingAmount: number;
+      user: User;
+    };
+  };
+  recommendations: {
+    pageInfo: {
+      total: number;
+    };
+    nodes: {
+      id: number;
+      rating: number;
+      userRating: number;
+      mediaRecommendation: {
+        id: number;
+        title: Title;
+        format: MediaFormat;
+        type: MediaType;
+        status: MediaStatus;
+        bannerImage: string;
+        coverImage: {
+          medium: string;
+        };
+      };
+      user: User;
+    };
+  };
+
+  externalLinks: ExternalLink[];
+  streamingEpisodes: {
+    site: string;
+    title: string;
+    thumbnail: string;
+    url: string;
+  };
+  trailer: {
+    id: string;
+    site: string;
+  };
+  rankings: Ranking[];
+  tags: Tag[];
+  mediaListEntry: {
+    id: number;
+    status: MediaStatus;
+    score: number;
+  };
+  stats: {
+    statusDistribution: {
+      status: MediaStatus;
+      amount: number;
+    }[];
+    scoreDistribution: {
+      score: number;
+      amount: number;
+    }[];
+  };
+};
+
+export type Tag = {
+  id: number;
+  name: string;
+  description: string;
+  rank: number;
+  isMediaSpoiler: boolean;
+  isGeneralSpoiler: boolean;
+  userId: number;
+};
+
+export type Ranking = {
+  id: number;
+  rank: number;
+  type: string;
+  format: string;
+  year: number;
+  season: string;
+  allTime: boolean;
+  context: string;
+};
+
+export type ExternalLink = {
+  id: number;
+  site: string;
+  url: string;
+  type: string;
+  language: string;
+  color: string;
+  icon: string;
+  notes: string;
+  isDisabled: boolean;
+};
+
+export type User = {
+  id: number;
+  name: string;
+  avatar: {
+    large: string;
+  };
 };

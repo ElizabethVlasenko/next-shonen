@@ -56,3 +56,12 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.truncate-16-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 16;
+  line-clamp: 16;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
