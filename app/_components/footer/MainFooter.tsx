@@ -1,9 +1,10 @@
 import DarkThemeHandler from "../ui/DarkThemeHandler";
+import Wrapper from "../Wrapper";
 
 export default function MainFooter() {
   return (
-    <footer className="bg-primary-500 p-4 text-slate-100 dark:bg-primary-800">
-      <div className="container mx-auto">
+    <footer className="flex w-full justify-center bg-primary-500 p-4 text-slate-100 dark:bg-primary-800">
+      <Wrapper>
         <div className="flex items-center justify-between">
           <DarkThemeHandler type="buttons" />
 
@@ -25,7 +26,7 @@ export default function MainFooter() {
           </a>
           . All images and media belong to their respective copyright owners.
         </p>
-      </div>
+      </Wrapper>
     </footer>
   );
 }
