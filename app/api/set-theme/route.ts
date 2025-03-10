@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
 
     // Set the status *when creating* the NextResponse:
     const response = NextResponse.json({ success: true }, { status: 200 });
-    console.log("api: theme set to", theme);
+    // console.log("api: theme set to", theme);
     response.cookies.set("theme", theme, { path: "/" });
     return response;
   } catch (error) {

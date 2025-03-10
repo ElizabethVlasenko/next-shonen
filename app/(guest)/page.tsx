@@ -19,7 +19,7 @@ type PageProps = {
 export default async function Home({ searchParams }: PageProps) {
   const data = (await fetchAnimeTopChart()) as SearchAnimeTopChart;
   const currSearchParams = (await searchParams) || {};
-  console.log("search params", currSearchParams);
+  // console.log("search params", currSearchParams);
   if (Object.keys(currSearchParams).length === 0)
     console.log("search is empty");
   // console.log(data);

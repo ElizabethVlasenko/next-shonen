@@ -13,7 +13,7 @@ export default async function page({ params }: PageProps) {
   const itemId = (await params).id;
   const anime = await fetchAnimeById({ mediaId: +itemId });
 
-  console.log(anime);
+  // console.log(anime);
 
   return (
     <div>

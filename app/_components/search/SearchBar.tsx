@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useSearchContext } from "../../_lib/Context/SearchContext";
 import { ChangeEvent } from "react";
 import ContentContainer from "../ui/ContentContainer";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/16/solid";
 
 const years = Array.from({ length: 86 }, (_, i) => 2025 - i);
 const formats = ["TV Show", "Movie", "OVA", "Special", "ONA", "Music"];
@@ -16,8 +17,7 @@ export default function SearchBar() {
 
   const router = useRouter();
 
-  const activeTags = [""];
-  const activeGenres = [""];
+  const activeGenres: string[] = searchParams.getAll("genres");
 
   const { genres, tags } = searchState;
   const cleanTags = tags.filter((tag) => tag.isAdult === false);
@@ -29,9 +29,10 @@ export default function SearchBar() {
     const value = event?.target.value;
     //gets the name of the search parameter ex. genre
     const name = event?.target.name;
+    const newSearchParams = new URLSearchParams(searchParams);
     //gets the current search parameters or an empty string
     if (name !== "genres") {
-      const newSearchParams = new URLSearchParams(searchParams);
+      //if the name is search, year, season, format...
       if (value === "") {
         newSearchParams.delete(name);
         router.push(`/search/anime?${newSearchParams.toString()}`);
@@ -41,9 +42,19 @@ export default function SearchBar() {
       router.push(`/search/anime?${newSearchParams.toString()}`);
       return;
     }
+    //handle the genres
+    if (name == "genres") {
+      if (activeGenres.includes(value)) {
+        newSearchParams.delete(name, value);
+        router.push(`/search/anime?${newSearchParams.toString()}`);
+        return;
+      }
+      activeGenres.push(value);
+      console.log(activeGenres);
+    }
     const search = searchParams + "&" || "";
     //prepare the params
-    params.set(name, value);
+    params.append(name, value);
     //update the URL using the current search params and combining it with the new ones with &
     router.push(`/search/anime?${search + params.toString()}`);
   };
@@ -60,18 +71,26 @@ export default function SearchBar() {
             type="text"
             defaultValue={searchParams.get("search") || ""}
             placeholder="Search anime..."
-            className="w-52 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            className="w-48 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
           />
         </div>
 
         {/* Genres */}
+        {/* TODO: Custom select for multiple items */}
+        {/* <SearchBarGenres
+          searchParams={searchParams}
+          handleSearchParams={handleSearchParams}
+          activeGenres={activeGenres}
+          genres={genres}
+          cleanTags={cleanTags}
+        /> */}
 
         <div>
           <h4 className="mb-2 text-sm font-semibold">Genres</h4>
           <select
             name="genres"
             defaultValue={searchParams.get("genres") || "Any"}
-            className="w-52 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            className="w-48 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
             {genres && cleanTags && (
@@ -100,7 +119,7 @@ export default function SearchBar() {
                       key={tag.name}
                       value={tag.name}
                       className={`px-3 py-1 text-sm ${
-                        activeTags.includes(tag.name)
+                        activeGenres.includes(tag.name)
                           ? "bg-primary-500 text-white"
                           : "bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-white"
                       }`}
@@ -120,7 +139,7 @@ export default function SearchBar() {
           <select
             name="year"
             defaultValue={searchParams.get("year") || "Any"}
-            className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            className="w-48 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
             <option value="null" hidden>
@@ -140,7 +159,7 @@ export default function SearchBar() {
           <select
             name="season"
             defaultValue={searchParams.get("season") || "Any"}
-            className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            className="w-48 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
             <option value="null" hidden>
@@ -160,7 +179,7 @@ export default function SearchBar() {
           <select
             name="format"
             defaultValue={searchParams.get("format") || "Any"}
-            className="w-52 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+            className="w-48 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             onChange={handleSearchParams}
           >
             <option value="null" hidden>
@@ -172,6 +191,11 @@ export default function SearchBar() {
               </option>
             ))}
           </select>
+        </div>
+
+        {/* TODO: Add more search options */}
+        <div className="ml-auto mt-auto h-fit rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+          <AdjustmentsHorizontalIcon className="h-6 w-6" />
         </div>
       </div>
     </ContentContainer>

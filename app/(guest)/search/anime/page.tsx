@@ -20,7 +20,7 @@ export default async function page({ searchParams }: PageProps) {
     if (currSearchParams.search?.length < 3) {
       delete currSearchParams?.search;
     }
-    console.log(currSearchParams);
+    // console.log(currSearchParams);
     const searchResultData = await fetchAnime({
       isAdult: false,
       type: "ANIME",
