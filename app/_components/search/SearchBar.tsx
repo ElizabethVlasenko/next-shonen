@@ -2,7 +2,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { useSearchContext } from "../../_lib/Context/SearchContext";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import ContentContainer from "../ui/ContentContainer";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/16/solid";
 
@@ -12,12 +12,15 @@ const seasons = ["Winter", "Spring", "Summer", "Fall"];
 
 export default function SearchBar() {
   const { searchState } = useSearchContext();
-  const params = new URLSearchParams();
   const searchParams = useSearchParams();
+
+  const [activeGenres, setActiveGenres] = useState<string[]>(
+    searchParams.getAll("genres") || [],
+  );
 
   const router = useRouter();
 
-  const activeGenres: string[] = searchParams.getAll("genres");
+  // const activeGenres: string[] = searchParams.getAll("genres");
 
   const { genres, tags } = searchState;
   const cleanTags = tags.filter((tag) => tag.isAdult === false);
@@ -30,33 +33,26 @@ export default function SearchBar() {
     //gets the name of the search parameter ex. genre
     const name = event?.target.name;
     const newSearchParams = new URLSearchParams(searchParams);
-    //gets the current search parameters or an empty string
+
     if (name !== "genres") {
-      //if the name is search, year, season, format...
       if (value === "") {
         newSearchParams.delete(name);
-        router.push(`/search/anime?${newSearchParams.toString()}`);
-        return;
+      } else {
+        newSearchParams.set(name, value);
       }
-      newSearchParams.set(name, value);
-      router.push(`/search/anime?${newSearchParams.toString()}`);
-      return;
-    }
-    //handle the genres
-    if (name == "genres") {
+    } else {
+      // Handle genres
       if (activeGenres.includes(value)) {
-        newSearchParams.delete(name, value);
-        router.push(`/search/anime?${newSearchParams.toString()}`);
-        return;
+        const updatedGenres = activeGenres.filter((genre) => genre !== value);
+        setActiveGenres(updatedGenres);
+        newSearchParams.delete("genres", value);
+      } else {
+        const updatedGenres = [...activeGenres, value];
+        setActiveGenres(updatedGenres);
+        newSearchParams.append("genres", value);
       }
-      activeGenres.push(value);
-      console.log(activeGenres);
     }
-    const search = searchParams + "&" || "";
-    //prepare the params
-    params.append(name, value);
-    //update the URL using the current search params and combining it with the new ones with &
-    router.push(`/search/anime?${search + params.toString()}`);
+    router.push(`/search/anime?${newSearchParams.toString()}`);
   };
 
   return (
