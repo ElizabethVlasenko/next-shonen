@@ -5,6 +5,7 @@ import { useSearchContext } from "../../_lib/Context/SearchContext";
 import { ChangeEvent, useState } from "react";
 import ContentContainer from "../ui/ContentContainer";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/16/solid";
+import debounce from "lodash.debounce";
 
 const years = Array.from({ length: 86 }, (_, i) => 2025 - i);
 const formats = ["TV Show", "Movie", "OVA", "Special", "ONA", "Music"];
@@ -32,6 +33,9 @@ export default function SearchBar() {
     const value = event?.target.value;
     //gets the name of the search parameter ex. genre
     const name = event?.target.name;
+
+    if (name === "search" && value.length < 3 && value !== "") return;
+
     const newSearchParams = new URLSearchParams(searchParams);
 
     if (name !== "genres") {
@@ -55,6 +59,8 @@ export default function SearchBar() {
     router.push(`/search/anime?${newSearchParams.toString()}`);
   };
 
+  const debounceSearchParams = debounce(handleSearchParams, 500);
+
   return (
     <ContentContainer className="mb-8">
       <div className="flex gap-4">
@@ -63,7 +69,7 @@ export default function SearchBar() {
           <h4 className="mb-2 text-sm font-semibold">Search</h4>
           <input
             name="search"
-            onChange={handleSearchParams}
+            onChange={debounceSearchParams}
             type="text"
             defaultValue={searchParams.get("search") || ""}
             placeholder="Search anime..."

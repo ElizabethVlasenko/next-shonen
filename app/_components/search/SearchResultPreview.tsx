@@ -13,7 +13,7 @@ export default function SearchResultPreview({
 }: SearchResultPreviewProps) {
   return (
     <div className="rounded-lg bg-white p-8 text-primary-700 shadow-md dark:bg-primary-900 dark:text-primary-50">
-      <ul className="relative flex flex-wrap justify-between gap-6">
+      <ul className="relative flex flex-wrap justify-start gap-6 gap-x-8">
         {results.map((anime) => (
           <SearchPreviewCard key={anime.id} anime={anime} />
         ))}

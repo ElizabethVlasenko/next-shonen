@@ -41,9 +41,6 @@ export default async function page({ searchParams }: PageProps) {
 
   return (
     <div>
-      <h1 className="pb-4 text-xl text-primary-800 dark:text-primary-50">
-        TODO: Anime Search Bar
-      </h1>
       <SearchBar />
       {Object.keys(currSearchParams).length === 0 ? (
         <div className="space-y-8">

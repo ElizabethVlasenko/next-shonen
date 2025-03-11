@@ -37,7 +37,7 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
       href={`/anime/${anime.id}/${generateSlug(anime.title.english || anime.title.romaji)}`}
     >
       <li
-        className={`relative h-auto`}
+        className={`relative h-auto rounded-lg shadow-[0px_0px_15px_0px_rgba(0,_0,_0,_0.1)] transition-all duration-300 ease-in-out`}
         key={anime.id}
         onMouseEnter={() => setIsShowMoreInfo(true)}
         onMouseLeave={() => setIsShowMoreInfo(false)}
