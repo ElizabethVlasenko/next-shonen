@@ -13,7 +13,7 @@ export default function Characters({ anime }: CharactersProps) {
   //current selected language
   const [language, setLanguage] = useState<string>("Japanese");
   //list of all languages
-  const languages = anime.characterPreview.edges[0].voiceActors.reduce(
+  const languages = anime.characterPreview.edges[0]?.voiceActors.reduce(
     (arr: string[], character) =>
       arr.find((lan) => lan === character.languageV2)
         ? arr
@@ -23,6 +23,8 @@ export default function Characters({ anime }: CharactersProps) {
 
   const [showAll, setShowAll] = useState<boolean>(false);
   const numCharacters = anime.characterPreview.edges.length;
+
+  if (!languages) return null;
 
   console.log(anime.characterPreview);
   return (
@@ -41,7 +43,7 @@ export default function Characters({ anime }: CharactersProps) {
         </select>
       </div>
 
-      <ul className="grid grid-cols-2 gap-5 ">
+      <ul className="grid grid-cols-2 gap-5">
         {anime.characterPreview.edges
           .slice(0, showAll ? numCharacters : 6)
           .map((character) => (

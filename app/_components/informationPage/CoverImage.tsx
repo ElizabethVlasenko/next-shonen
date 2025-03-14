@@ -15,7 +15,7 @@ export default function CoverImage({ anime }: CoverImageProps) {
         alt={anime.title.english || anime.title.native}
         width={300}
         height={450}
-        style={{ height: "450px", width: "300px" }}
+        style={{ width: "300px" }}
         className="select-none rounded-lg object-cover shadow-md"
       />
       <StatusTag

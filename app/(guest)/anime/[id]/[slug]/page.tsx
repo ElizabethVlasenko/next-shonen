@@ -21,12 +21,12 @@ export default async function page({ params }: PageProps) {
 
       {/* Main Content */}
       <div className="mt-6 flex items-start gap-6">
-        <div className="flex min-w-[300px] flex-col justify-start gap-6">
+        <div className="flex w-[300px] min-w-[300px] flex-col justify-start gap-6">
           <CoverImage anime={anime} />
 
           <SidebarInfo anime={anime} />
         </div>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-grow flex-col gap-6">
           <Description anime={anime} />
 
           <Characters anime={anime} />
