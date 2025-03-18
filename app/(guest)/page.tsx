@@ -1,9 +1,9 @@
 import { type Metadata } from "next";
-import SearchCategoriesPreview from "../_components/search/SearchCategoriesPreview";
-import SearchBar from "../_components/search/SearchBar";
-import { fetchAnimeTopChart } from "../_lib/graphql/fetchers/animeFetcher";
-import Button from "../_components/ui/Button";
 import Image from "next/image";
+import SearchBar from "../_components/search/SearchBar";
+import SearchCategoriesPreview from "../_components/search/SearchCategoriesPreview";
+import Button from "../_components/ui/Button";
+import { fetchAnimeTopChart } from "../_lib/graphql/fetchers/animeFetcher";
 import { type SearchAnimeTopChart } from "../_lib/graphql/types/anime";
 
 export const metadata: Metadata = {
@@ -57,28 +57,24 @@ export default async function Home({ searchParams }: PageProps) {
       <SearchBar />
       <div className="space-y-8">
         <SearchCategoriesPreview
-          number={5}
           title="Trending now"
           href={"/search/anime/trending"}
           results={trendingNow}
         />
 
         <SearchCategoriesPreview
-          number={5}
           title="Popular this season"
           href={"/search/anime/this-season"}
           results={popularThisSeason}
         />
 
         <SearchCategoriesPreview
-          number={5}
           title="Upcoming next season"
           href={"/search/anime/next-season"}
           results={popularNextSeason}
         />
 
         <SearchCategoriesPreview
-          number={5}
           title="All time popular"
           href={"/search/anime/popular"}
           results={allTimePopular}

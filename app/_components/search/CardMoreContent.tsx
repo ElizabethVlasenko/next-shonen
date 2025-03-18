@@ -14,7 +14,7 @@ export default function CardMoreContent({ anime }: CardMoreContentProps) {
 
   return (
     <>
-      <p className="mb-1 text-sm font-bold text-primary-800 dark:text-primary-50">
+      <p className="mb-1 text-base font-bold text-primary-800 md:text-sm dark:text-primary-50">
         <AnimeAiringInfo
           status={anime.status}
           nextAiringEpisode={anime.nextAiringEpisode}
@@ -26,18 +26,18 @@ export default function CardMoreContent({ anime }: CardMoreContentProps) {
       </p>
 
       {anime.averageScore && (
-        <p className="mb-2 text-xs text-primary-800 dark:text-primary-50">
+        <p className="mb-2 text-sm text-primary-800 md:text-xs dark:text-primary-50">
           <span className="text-base font-bold">{anime.averageScore}</span>/100
         </p>
       )}
 
       {anime.studios.edges[0] && (
-        <p className="truncate-2-lines mb-1 text-sm leading-4 text-primary-800 dark:text-primary-50">
+        <p className="truncate-2-lines mb-1 text-base leading-4 text-primary-800 md:text-sm dark:text-primary-50">
           {anime.studios.edges[0]?.node.name}
         </p>
       )}
 
-      <p className="mb-2 text-sm text-primary-800 dark:text-primary-50">
+      <p className="mb-2 text-base text-primary-800 md:text-sm dark:text-primary-50">
         {formatAnimeFormat(anime.format)}
         {anime.episodes ? " | " + anime.episodes + " episodes" : ""}
       </p>
@@ -46,7 +46,7 @@ export default function CardMoreContent({ anime }: CardMoreContentProps) {
         {anime.genres.slice(0, 3).map((genre) => (
           <span
             style={{ backgroundColor: animePrimaryColor }}
-            className={`block rounded-full px-3 py-1 font-sans text-sm font-bold ${textColor} `}
+            className={`block rounded-full px-3 py-1 font-sans text-base font-bold md:text-sm ${textColor} `}
             key={genre}
           >
             {genre}

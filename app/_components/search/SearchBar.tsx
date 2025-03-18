@@ -63,7 +63,7 @@ export default function SearchBar() {
 
   return (
     <ContentContainer className="mb-8">
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4 md:flex-nowrap">
         {/* Search Input */}
         <div>
           <h4 className="mb-2 text-sm font-semibold">Search</h4>

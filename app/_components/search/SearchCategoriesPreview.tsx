@@ -1,6 +1,7 @@
 "use client";
 
 import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
+import useWindowSize from "../../_lib/helpers/useWindowSize";
 import Button from "../ui/Button";
 import ContentContainer from "../ui/ContentContainer";
 import SearchPreviewCard from "./SearchCategoriesPreviewCard";
@@ -8,7 +9,7 @@ import SearchPreviewCard from "./SearchCategoriesPreviewCard";
 type SearchCategoriesPreviewProps = {
   title: string;
   href: string;
-  number: number; //number of shown entries
+  number?: number; //number of shown entries
   results: SearchResultAnimeMedia[];
 };
 
@@ -18,6 +19,12 @@ export default function SearchCategoriesPreview({
   results,
   number,
 }: SearchCategoriesPreviewProps) {
+  const windowWidth = useWindowSize().width;
+  let numberToDisplay = 5;
+  if (windowWidth !== undefined && windowWidth < 768) {
+    numberToDisplay = 4;
+  }
+
   return (
     <ContentContainer>
       {/* Category title */}
@@ -29,8 +36,8 @@ export default function SearchCategoriesPreview({
         </Button>
       </div>
       {/* Category list of anime/manga titles (5 per category)*/}
-      <ul className="relative flex justify-between gap-6">
-        {results.slice(0, number).map((anime) => (
+      <ul className="relative grid grid-cols-2 justify-between gap-6 md:flex">
+        {results.slice(0, number ? number : numberToDisplay).map((anime) => (
           <SearchPreviewCard key={anime.id} anime={anime} />
         ))}
       </ul>

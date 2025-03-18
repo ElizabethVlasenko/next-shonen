@@ -42,9 +42,9 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
         onMouseEnter={() => setIsShowMoreInfo(true)}
         onMouseLeave={() => setIsShowMoreInfo(false)}
       >
-        <div className="relative flex h-full w-48 min-w-48 flex-col items-center overflow-hidden rounded-lg transition hover:shadow-lg">
+        <div className="relative flex h-full flex-col items-center overflow-hidden rounded-lg transition hover:shadow-lg md:w-48 md:min-w-48">
           {/* image */}
-          <div className="relative mb-14 h-64 w-48 object-cover shadow-sm">
+          <div className="relative mb-14 h-96 w-full object-cover shadow-sm md:h-64 md:w-48">
             <Image
               src={anime.coverImage.large}
               alt={anime.title.english || anime.title.romaji}
@@ -54,16 +54,16 @@ export default function SearchPreviewCard({ anime }: SearchPreviewCardProps) {
             />
           </div>
           <div
-            className={`absolute bottom-0 w-full rounded-lg bg-white p-4 px-5 pt-3 transition-all duration-300 ease-in-out dark:bg-black ${isShowMoreInfo ? "h-[19.5rem]" : "h-16"}`}
+            className={`absolute bottom-0 w-full rounded-lg bg-white p-4 px-5 pt-3 transition-all duration-300 ease-in-out dark:bg-black ${isShowMoreInfo ? "h-[27.5rem] md:h-[19.5rem]" : "h-16"}`}
           >
             {/* background colored in anime primary color */}
             <div
               style={{ backgroundColor: anime.coverImage.color || "#8173C6" }}
-              className={`absolute inset-0 h-full w-48 rounded-lg opacity-60 dark:brightness-75 ${bgBrightness}`}
+              className={`absolute inset-0 size-full rounded-lg opacity-60 md:w-48 dark:brightness-75 ${bgBrightness}`}
             ></div>
             <div className="relative">
               <h3
-                className={`flex-grow text-center text-lg font-medium leading-5 ${isShowMoreInfo ? "truncate-3-lines mb-4" : "truncate-2-lines"}`}
+                className={`grow text-center text-xl font-medium md:text-lg md:leading-5 ${isShowMoreInfo ? "truncate-3-lines mb-4" : "truncate-2-lines"}`}
               >
                 {anime.title.english || anime.title.romaji}
               </h3>
