@@ -13,7 +13,9 @@ export default function MainNav() {
         <NavigationLink href="/user/userId/mangalist">
           Manga list
         </NavigationLink>
-        <NavigationLink href="/search/anime">Browse</NavigationLink>
+        <NavigationLink href="/search/anime" data-id="browse-link">
+          Browse
+        </NavigationLink>
         <NavigationLink href="/forum/overview">Forum</NavigationLink>
       </ul>
     </nav>

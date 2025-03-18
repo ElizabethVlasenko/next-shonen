@@ -11,6 +11,10 @@ type SearchCategoriesPreviewProps = {
   href: string;
   number?: number; //number of shown entries
   results: SearchResultAnimeMedia[];
+  /**
+   * An optional data-id for the main div element. data-id={`search-category-${id}`}
+   */
+  id?: string;
 };
 
 export default function SearchCategoriesPreview({
@@ -18,6 +22,7 @@ export default function SearchCategoriesPreview({
   href,
   results,
   number,
+  id,
 }: SearchCategoriesPreviewProps) {
   const windowWidth = useWindowSize().width;
   let numberToDisplay = 5;
@@ -28,8 +33,11 @@ export default function SearchCategoriesPreview({
   return (
     <ContentContainer>
       {/* Category title */}
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-2xl font-semibold">{title} </h2>
+      <div
+        className="mb-4 flex items-center justify-between"
+        data-id={`search-category${id ? "-" + id : ""}`}
+      >
+        <h2 className="text-2xl font-semibold">{title}</h2>
         {/* TODO: custom link component */}
         <Button variant="link" size="sm" href={href}>
           View All

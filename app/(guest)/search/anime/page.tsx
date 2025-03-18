@@ -49,6 +49,7 @@ export default async function page({ searchParams }: PageProps) {
             title="Trending now"
             href={"/search/anime/trending"}
             results={trendingNow}
+            id="trending-now"
           />
 
           <SearchCategoriesPreview
@@ -56,6 +57,7 @@ export default async function page({ searchParams }: PageProps) {
             title="Popular this season"
             href={"/search/anime/this-season"}
             results={popularThisSeason}
+            id="popular-this-season"
           />
 
           <SearchCategoriesPreview
@@ -63,6 +65,7 @@ export default async function page({ searchParams }: PageProps) {
             title="Upcoming next season"
             href={"/search/anime/next-season"}
             results={popularNextSeason}
+            id="upcoming-next-season"
           />
 
           <SearchCategoriesPreview
@@ -70,6 +73,7 @@ export default async function page({ searchParams }: PageProps) {
             title="All time popular"
             href={"/search/anime/popular"}
             results={allTimePopular}
+            id="all-time-popular"
           />
         </div>
       ) : (

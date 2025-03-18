@@ -8,7 +8,7 @@ type ContentContainerProps = {
 
 export default function ContentContainer({
   children,
-  className,
+  className = "",
   ref,
 }: ContentContainerProps) {
   return (

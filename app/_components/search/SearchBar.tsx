@@ -197,7 +197,7 @@ export default function SearchBar() {
 
         {/* TODO: Add more search options */}
         <div className="ml-auto mt-auto h-fit rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
-          <AdjustmentsHorizontalIcon className="h-6 w-6" />
+          <AdjustmentsHorizontalIcon className="size-6" />
         </div>
       </div>
     </ContentContainer>
