@@ -34,17 +34,17 @@ export default function DarkThemeHandler({
 
   if (type === "toggle") {
     return (
-      <div className="h-6 w-6">
-        {theme && domLoaded ? (
+      <div className="size-6">
+        {theme == "dark" && domLoaded ? (
           <button onClick={toggleDarkMode}>
             <SunIcon
-              className={`h-6 w-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}
+              className={`size-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}
             />
           </button>
         ) : (
           <button onClick={toggleDarkMode}>
             <MoonIcon
-              className={`h-6 w-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}
+              className={`size-6 text-primary-50 transition-colors hover:text-accent-200 ${className}`}
             />
           </button>
         )}
@@ -62,21 +62,21 @@ export default function DarkThemeHandler({
             label="Dark Theme"
             changeTheme={() => setDarkMode("dark")}
           >
-            <MoonIcon className="h-6 w-6 text-primary-50 transition-colors group-hover:text-accent-200" />
+            <MoonIcon className="size-6 text-primary-50 transition-colors group-hover:text-accent-200" />
           </ThemeButton>
 
           <ThemeButton
             label="Light Theme"
             changeTheme={() => setDarkMode("light")}
           >
-            <SunIcon className="h-6 w-6 text-primary-50 transition-colors group-hover:text-accent-200" />
+            <SunIcon className="size-6 text-primary-50 transition-colors group-hover:text-accent-200" />
           </ThemeButton>
 
           <ThemeButton
             label="System Theme"
             changeTheme={() => setDarkMode(systemTheme)}
           >
-            <ComputerDesktopIcon className="h-6 w-6 text-primary-50 transition-colors group-hover:text-accent-200" />
+            <ComputerDesktopIcon className="size-6 text-primary-50 transition-colors group-hover:text-accent-200" />
           </ThemeButton>
         </div>
       </div>

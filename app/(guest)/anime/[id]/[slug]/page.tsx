@@ -26,7 +26,7 @@ export default async function page({ params }: PageProps) {
 
           <SidebarInfo anime={anime} />
         </div>
-        <div className="flex flex-grow flex-col gap-6">
+        <div className="flex grow flex-col gap-6">
           <Description anime={anime} />
 
           <Characters anime={anime} />
