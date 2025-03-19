@@ -1,5 +1,6 @@
 import SearchBar from "../../../_components/search/SearchBar";
 import SearchCategoriesPreview from "../../../_components/search/SearchCategoriesPreview";
+import SearchNoResultPreview from "../../../_components/search/SearchNoResultPreview";
 import SearchResultPreview from "../../../_components/search/SearchResultPreview";
 import {
   fetchAnime,
@@ -20,7 +21,7 @@ export default async function page({ searchParams }: PageProps) {
     if (currSearchParams.search?.length < 3) {
       delete currSearchParams?.search;
     }
-    // console.log(currSearchParams);
+
     const searchResultData = await fetchAnime({
       isAdult: false,
       type: "ANIME",
@@ -34,6 +35,9 @@ export default async function page({ searchParams }: PageProps) {
 
   const data = await fetchAnimeTopChart();
 
+  const hasSearchParams = Object.keys(currSearchParams).length !== 0;
+  const hasSearchResults = searchResult.length > 0;
+
   const trendingNow = data.trending.media;
   const popularThisSeason = data.popularSeason.media;
   const popularNextSeason = data.popularNextSeason.media;
@@ -42,7 +46,14 @@ export default async function page({ searchParams }: PageProps) {
   return (
     <div>
       <SearchBar />
-      {Object.keys(currSearchParams).length === 0 ? (
+      {hasSearchParams && !hasSearchResults ? (
+        <SearchNoResultPreview />
+      ) : hasSearchParams ? (
+        <SearchResultPreview
+          results={searchResult}
+          key={JSON.stringify(currSearchParams)}
+        />
+      ) : (
         <div className="space-y-8">
           <SearchCategoriesPreview
             number={5}
@@ -76,8 +87,6 @@ export default async function page({ searchParams }: PageProps) {
             id="all-time-popular"
           />
         </div>
-      ) : (
-        <SearchResultPreview results={searchResult} />
       )}
     </div>
   );

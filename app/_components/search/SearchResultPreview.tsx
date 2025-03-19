@@ -1,5 +1,3 @@
-"use client";
-
 import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
 
 import SearchPreviewCard from "./SearchCategoriesPreviewCard";
