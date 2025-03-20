@@ -147,14 +147,16 @@ export type Studios = {
   }[];
 };
 
+export type PageInfo = {
+  total: number;
+  perPage: number;
+  currentPage: number;
+  lastPage: number;
+  hasNextPage: boolean;
+};
+
 export type SearchResultAnime = {
-  pageInfo: {
-    total: number;
-    perPage: number;
-    currentPage: number;
-    lastPage: number;
-    hasNextPage: boolean;
-  };
+  pageInfo: PageInfo;
   media: SearchResultAnimeMedia[];
 };
 

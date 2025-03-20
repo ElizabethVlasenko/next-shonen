@@ -1,7 +1,7 @@
 "use client";
 
 import { SearchResultAnimeMedia } from "../../_lib/graphql/types/anime";
-import useWindowSize from "../../_lib/helpers/useWindowSize";
+import useWindowSize from "../../_lib/hooks/useWindowSize";
 import Button from "../ui/Button";
 import ContentContainer from "../ui/ContentContainer";
 import SearchPreviewCard from "./SearchCategoriesPreviewCard";

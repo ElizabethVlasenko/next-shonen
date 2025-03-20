@@ -9,6 +9,11 @@ import {
 } from "../types/anime";
 
 export const fetchAnime = async (variables: SearchAnimeVariables) => {
+  variables = {
+    year: variables.year?.toString(),
+    ...variables,
+  };
+  console.log("Variables:", variables);
   try {
     const { data } = await client.query({
       query: SEARCH_ANIME,
@@ -16,7 +21,7 @@ export const fetchAnime = async (variables: SearchAnimeVariables) => {
       fetchPolicy: "cache-first",
     });
 
-    // console.log("Data:", data.Page);
+    console.log("Data:", data.Page);
     // console.log("Cache:", client.cache.extract());
 
     return data.Page as SearchResultAnime;

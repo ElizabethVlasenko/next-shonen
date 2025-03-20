@@ -16,6 +16,7 @@ export default async function page({ searchParams }: PageProps) {
   const currSearchParams = (await searchParams) || {};
 
   let searchResult: SearchResultAnimeMedia[] = [];
+
   if (Object.keys(currSearchParams).length !== 0) {
     //min 3 character search
     if (currSearchParams.search?.length < 3) {
@@ -50,7 +51,8 @@ export default async function page({ searchParams }: PageProps) {
         <SearchNoResultPreview />
       ) : hasSearchParams ? (
         <SearchResultPreview
-          results={searchResult}
+          initialResults={searchResult}
+          searchParams={currSearchParams}
           key={JSON.stringify(currSearchParams)}
         />
       ) : (
