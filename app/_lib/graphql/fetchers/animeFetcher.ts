@@ -10,8 +10,8 @@ import {
 
 export const fetchAnime = async (variables: SearchAnimeVariables) => {
   variables = {
-    year: variables.year?.toString(),
     ...variables,
+    year: variables.year + "%",
   };
   console.log("Variables:", variables);
   try {
