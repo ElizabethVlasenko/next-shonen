@@ -74,6 +74,13 @@ export type MediaSource =
 
 export type MediaSeason = "WINTER" | "SPRING" | "SUMMER" | "FALL";
 
+export const MEDIA_SEASONS: MediaSeason[] = [
+  "WINTER",
+  "SPRING",
+  "SUMMER",
+  "FALL",
+];
+
 export type MediaType = "ANIME" | "MANGA";
 
 export type NextAiringEpisode = {

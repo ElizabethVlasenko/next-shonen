@@ -6,10 +6,12 @@ import { ChangeEvent, useState } from "react";
 import ContentContainer from "../ui/ContentContainer";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/16/solid";
 import debounce from "lodash.debounce";
+import { MEDIA_SEASONS } from "../../_lib/graphql/types/anime";
+import { stringToSentenceCase } from "../../_lib/helpers/formatters/stringFormat";
 
 const years = Array.from({ length: 86 }, (_, i) => 2025 - i);
 const formats = ["TV Show", "Movie", "OVA", "Special", "ONA", "Music"];
-const seasons = ["Winter", "Spring", "Summer", "Fall"];
+const seasons = MEDIA_SEASONS.map((season) => stringToSentenceCase(season));
 
 export default function SearchBar() {
   const { searchState } = useSearchContext();
@@ -168,7 +170,7 @@ export default function SearchBar() {
               Any
             </option>
             {seasons.map((season) => (
-              <option key={season} value={season}>
+              <option key={season} value={season.toUpperCase()}>
                 {season}
               </option>
             ))}
