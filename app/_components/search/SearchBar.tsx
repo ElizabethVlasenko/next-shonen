@@ -70,6 +70,7 @@ export default function SearchBar() {
         <div>
           <h4 className="mb-2 text-sm font-semibold">Search</h4>
           <input
+            data-id="search-input"
             name="search"
             onChange={debounceSearchParams}
             type="text"
@@ -92,6 +93,7 @@ export default function SearchBar() {
         <div>
           <h4 className="mb-2 text-sm font-semibold">Genres</h4>
           <select
+            data-id="genres-input"
             name="genres"
             defaultValue={searchParams.get("genres") || "Any"}
             className="w-48 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
@@ -141,6 +143,7 @@ export default function SearchBar() {
         <div>
           <h4 className="mb-2 text-sm font-semibold">Year</h4>
           <select
+            data-id="year-input"
             name="year"
             defaultValue={searchParams.get("year") || "Any"}
             className="w-48 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
@@ -161,6 +164,7 @@ export default function SearchBar() {
         <div>
           <h4 className="mb-2 text-sm font-semibold">Season</h4>
           <select
+            data-id="season-input"
             name="season"
             defaultValue={searchParams.get("season") || "Any"}
             className="w-48 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
@@ -181,6 +185,7 @@ export default function SearchBar() {
         <div>
           <h4 className="mb-2 text-sm font-semibold">Format</h4>
           <select
+            data-id="format-input"
             name="format"
             defaultValue={searchParams.get("format") || "Any"}
             className="w-48 rounded-lg border border-gray-300 bg-white px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"

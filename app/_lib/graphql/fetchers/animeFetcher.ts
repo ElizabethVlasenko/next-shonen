@@ -11,7 +11,7 @@ import {
 export const fetchAnime = async (variables: SearchAnimeVariables) => {
   variables = {
     ...variables,
-    year: variables.year + "%",
+    year: variables.year ? variables.year + "%" : undefined,
   };
   console.log("Variables:", variables);
   try {
