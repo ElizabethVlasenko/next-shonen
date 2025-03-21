@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimeInfo } from "../../_lib/graphql/types/anime";
 import ContentContainer from "../ui/ContentContainer";
 import Character from "./Character";
+import Button from "../ui/Button";
 
 type CharactersProps = {
   anime: AnimeInfo;
@@ -54,13 +55,13 @@ export default function Characters({ anime }: CharactersProps) {
             />
           ))}
       </ul>
-
-      <button
+      <Button
+        variant="secondaryPurple"
         onClick={() => setShowAll(!showAll)}
-        className="mt-5 w-full rounded-lg border border-gray-300 bg-primary-100 px-4 py-2 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-primary-800 dark:bg-primary-600 dark:text-white"
+        className="mt-5 w-full"
       >
         {showAll ? "Show less" : "Show more"}
-      </button>
+      </Button>
     </ContentContainer>
   );
 }

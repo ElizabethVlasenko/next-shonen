@@ -3,6 +3,7 @@ import Characters from "../../../../_components/informationPage/Characters";
 import CoverImage from "../../../../_components/informationPage/CoverImage";
 import Description from "../../../../_components/informationPage/Description";
 import SidebarInfo from "../../../../_components/informationPage/SidebarInfo";
+import SidebarTags from "../../../../_components/informationPage/SidebarTags";
 import { fetchAnimeById } from "../../../../_lib/graphql/fetchers/animeFetcherById";
 
 type PageProps = {
@@ -13,7 +14,7 @@ export default async function page({ params }: PageProps) {
   const itemId = (await params).id;
   const anime = await fetchAnimeById({ mediaId: +itemId });
 
-  // console.log(anime);
+  console.log(anime.tags);
 
   return (
     <div>
@@ -25,6 +26,8 @@ export default async function page({ params }: PageProps) {
           <CoverImage anime={anime} />
 
           <SidebarInfo anime={anime} />
+
+          <SidebarTags tags={anime.tags} />
         </div>
         <div className="flex grow flex-col gap-6">
           <Description anime={anime} />

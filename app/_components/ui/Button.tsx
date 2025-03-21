@@ -8,6 +8,7 @@ type BaseProps = {
   variant?:
     | "primary"
     | "secondary"
+    | "secondaryPurple"
     | "danger"
     | "link"
     | "primaryReverse"
@@ -50,7 +51,9 @@ export default function Button(props: ButtonProps | LinkProps) {
       "bg-primary-100 dark:bg-primary-200 text-primary-800 dark:text-primary-900 dark:hover:bg-primary-300 hover:bg-primary-200 focus:ring-primary-300",
     secondary:
       "bg-gray-300  text-gray-800 hover:bg-gray-400 focus:ring-gray-400",
-    danger: "bg-red-600  text-white hover:bg-red-700 focus:ring-red-500",
+    secondaryPurple:
+      "border-gray-300 bg-primary-100 focus:ring-primary-500 dark:border-primary-800 dark:bg-primary-600 dark:text-white",
+    danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500",
     link: "dark:text-primary-100 text-primary-500 dark:hover:text-primary-200 hover:text-primary-700",
     linkReverse: "text-primary-50 hover:text-primary-200",
   };
@@ -72,7 +75,10 @@ export default function Button(props: ButtonProps | LinkProps) {
 
   if (isLinkProps(props)) {
     return (
-      <Link {...(otherProps as LinkProps)} className={buttonClasses}>
+      <Link
+        {...(otherProps as LinkProps)}
+        className={otherProps.className + buttonClasses}
+      >
         {children}
       </Link>
     );
@@ -80,8 +86,8 @@ export default function Button(props: ButtonProps | LinkProps) {
 
   return (
     <button
-      className={buttonClasses}
       {...(otherProps as ButtonProps)}
+      className={otherProps.className + buttonClasses}
       disabled={disabled}
     >
       {children}
