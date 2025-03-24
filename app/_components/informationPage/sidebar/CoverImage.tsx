@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import StatusTag from "../ui/StatusTag";
-import { AnimeInfo } from "../../_lib/graphql/types/anime";
+import StatusTag from "../../ui/StatusTag";
+import { AnimeInfo } from "../../../_lib/graphql/types/anime";
 
 type CoverImageProps = {
   anime: AnimeInfo;

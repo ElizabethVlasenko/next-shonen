@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { AnimeInfo } from "../../_lib/graphql/types/anime";
-import ContentContainer from "../ui/ContentContainer";
+import { AnimeInfo } from "../../../_lib/graphql/types/anime";
+import ContentContainer from "../../ui/ContentContainer";
 import Character from "./Character";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
 type CharactersProps = {
   anime: AnimeInfo;
 };
+
+const CHARACTERS_SHORT_LIST_LENGTH = 6;
 
 export default function Characters({ anime }: CharactersProps) {
   //current selected language
@@ -27,7 +29,7 @@ export default function Characters({ anime }: CharactersProps) {
 
   if (!languages) return null;
 
-  console.log(anime.characterPreview);
+  // console.log(anime.characterPreview);
   return (
     <ContentContainer>
       <div className="mb-5 flex items-center justify-between">
@@ -46,7 +48,7 @@ export default function Characters({ anime }: CharactersProps) {
 
       <ul className="grid grid-cols-2 gap-5">
         {anime.characterPreview.edges
-          .slice(0, showAll ? numCharacters : 6)
+          .slice(0, showAll ? numCharacters : CHARACTERS_SHORT_LIST_LENGTH)
           .map((character) => (
             <Character
               key={character.node.name.full}
@@ -55,13 +57,15 @@ export default function Characters({ anime }: CharactersProps) {
             />
           ))}
       </ul>
-      <Button
-        variant="secondaryPurple"
-        onClick={() => setShowAll(!showAll)}
-        className="mt-5 w-full"
-      >
-        {showAll ? "Show less" : "Show more"}
-      </Button>
+      {numCharacters > CHARACTERS_SHORT_LIST_LENGTH && (
+        <Button
+          variant="secondaryPurple"
+          onClick={() => setShowAll(!showAll)}
+          className="mt-5 w-full"
+        >
+          {showAll ? "Show less" : "Show more"}
+        </Button>
+      )}
     </ContentContainer>
   );
 }

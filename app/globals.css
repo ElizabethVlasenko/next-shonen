@@ -47,6 +47,15 @@ h3 {
   border-radius: 5px;
 }
 
+.truncate-1-line {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .truncate-2-lines {
   display: -webkit-box;
   -webkit-line-clamp: 2;

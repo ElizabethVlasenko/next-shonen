@@ -1,10 +1,11 @@
 import Banner from "../../../../_components/informationPage/Banner";
-import Characters from "../../../../_components/informationPage/Characters";
-import CoverImage from "../../../../_components/informationPage/CoverImage";
+import Characters from "../../../../_components/informationPage/characters/Characters";
+import CoverImage from "../../../../_components/informationPage/sidebar/CoverImage";
 import Description from "../../../../_components/informationPage/Description";
-import SidebarInfo from "../../../../_components/informationPage/SidebarInfo";
-import SidebarTags from "../../../../_components/informationPage/SidebarTags";
+import SidebarInfo from "../../../../_components/informationPage/sidebar/SidebarInfo";
+import SidebarTags from "../../../../_components/informationPage/sidebar/SidebarTags";
 import { fetchAnimeById } from "../../../../_lib/graphql/fetchers/animeFetcherById";
+import Relations from "../../../../_components/informationPage/relations/Relations";
 
 type PageProps = {
   params: { id: string; slug: string };
@@ -13,8 +14,6 @@ type PageProps = {
 export default async function page({ params }: PageProps) {
   const itemId = (await params).id;
   const anime = await fetchAnimeById({ mediaId: +itemId });
-
-  console.log(anime.tags);
 
   return (
     <div>
@@ -32,7 +31,11 @@ export default async function page({ params }: PageProps) {
         <div className="flex grow flex-col gap-6">
           <Description anime={anime} />
 
-          <Characters anime={anime} />
+          {anime.relations.edges.length > 0 && <Relations anime={anime} />}
+
+          {anime.characterPreview.edges.length > 0 && (
+            <Characters anime={anime} />
+          )}
         </div>
       </div>
     </div>

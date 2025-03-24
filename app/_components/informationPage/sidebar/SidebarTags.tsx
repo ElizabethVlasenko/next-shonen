@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tag } from "../../_lib/graphql/types/anime";
-import ContentContainer from "../ui/ContentContainer";
-import Button from "../ui/Button";
+import { Tag } from "../../../_lib/graphql/types/anime";
+import ContentContainer from "../../ui/ContentContainer";
+import Button from "../../ui/Button";
 
 type SidebarTagsProps = {
   tags: Tag[];
@@ -40,7 +40,7 @@ export default function SidebarTags({ tags }: SidebarTagsProps) {
         onClick={() => setShowAll(!showAll)}
         className="mt-5 w-full"
       >
-        {showAll ? "Show spoiler tags" : "Hide spoiler tags"}
+        {showAll ? "Hide spoiler tags" : "Show spoiler tags"}
       </Button>
     </ContentContainer>
   );

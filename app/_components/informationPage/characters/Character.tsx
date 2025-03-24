@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
-import { stringToSentenceCase } from "../../_lib/helpers/formatters/stringFormat";
+import { stringToSentenceCase } from "../../../_lib/helpers/formatters/stringFormat";
 import {
   Character as CharacterType,
   voiceActor,
-} from "../../_lib/graphql/types/anime";
+} from "../../../_lib/graphql/types/anime";
 
 type CharacterProps = {
   selectedLanguage: string;
@@ -29,7 +29,7 @@ export default function Character({
   return (
     <li
       key={character.node.name.full}
-      className="grid grid-cols-2 justify-between gap-2 rounded-lg bg-primary-50 bg-opacity-35 dark:bg-primary-800 dark:bg-opacity-40"
+      className="grid grid-cols-2 justify-between gap-2 rounded-lg bg-primary-50/35 dark:bg-primary-800/40"
     >
       {/* TODO: link character to a character page */}
       <div className="flex items-center gap-2 text-sm">
@@ -40,9 +40,9 @@ export default function Character({
           width={60}
           height={90}
           style={{ height: "90px", width: "60px" }}
-          className="rounded-lg"
+          className="rounded-lg object-cover"
         />
-        <div className="flex h-full w-full flex-col justify-between px-1 py-2">
+        <div className="flex size-full flex-col justify-between px-1 py-2">
           <span>{character.node.name.full}</span>
           <span className="text-xs">
             {stringToSentenceCase(character.role)}
@@ -51,7 +51,7 @@ export default function Character({
       </div>
       {/* TODO: link voice actor to a voice actor page */}
       {selectedLanguageVoiceActor && (
-        <div className="items-top flex justify-end gap-2">
+        <div className="flex items-end justify-end gap-2">
           <div className="flex h-full flex-col justify-between px-1 py-2 text-right text-sm">
             <span>{selectedLanguageVoiceActor.name.full}</span>
             <span className="text-xs">
@@ -66,7 +66,7 @@ export default function Character({
               width={60}
               height={90}
               style={{ height: "90px", width: "60px" }}
-              className="rounded-lg"
+              className="rounded-lg object-cover"
             />
           )}
         </div>

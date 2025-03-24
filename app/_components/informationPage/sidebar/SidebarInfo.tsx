@@ -1,8 +1,8 @@
 import React from "react";
-import { AnimeInfo } from "../../_lib/graphql/types/anime";
-import ContentContainer from "../ui/ContentContainer";
-import { getTextColorForBG } from "../../_lib/helpers/color";
-import { stringToSentenceCase } from "../../_lib/helpers/formatters/stringFormat";
+import { AnimeInfo } from "../../../_lib/graphql/types/anime";
+import ContentContainer from "../../ui/ContentContainer";
+import { getTextColorForBG } from "../../../_lib/helpers/color";
+import { stringToSentenceCase } from "../../../_lib/helpers/formatters/stringFormat";
 import SidebarInfoConditionalData from "./SidebarInfoConditionalData";
 import { format, formatDuration, intervalToDuration } from "date-fns";
 
@@ -15,7 +15,7 @@ export default function SidebarInfo({ anime }: SidebarInfoProps) {
   const textColor = getTextColorForBG(animePrimaryColor);
   const mainStudio = anime.studios.edges?.filter((studio) => studio.isMain)[0];
 
-  console.log(anime);
+  // console.log(anime);
 
   return (
     <ContentContainer>
