@@ -6,6 +6,7 @@ import SidebarInfo from "../../../../_components/informationPage/sidebar/Sidebar
 import SidebarTags from "../../../../_components/informationPage/sidebar/SidebarTags";
 import { fetchAnimeById } from "../../../../_lib/graphql/fetchers/animeFetcherById";
 import Relations from "../../../../_components/informationPage/relations/Relations";
+import StaffList from "../../../../_components/informationPage/staff/StaffList";
 
 type PageProps = {
   params: { id: string; slug: string };
@@ -34,8 +35,10 @@ export default async function page({ params }: PageProps) {
           {anime.relations.edges.length > 0 && <Relations anime={anime} />}
 
           {anime.characterPreview.edges.length > 0 && (
-            <Characters anime={anime} />
+            <Characters anime={anime} mediaId={String(itemId)} />
           )}
+
+          {anime.staffPreview.edges.length > 0 && <StaffList anime={anime} />}
         </div>
       </div>
     </div>

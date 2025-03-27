@@ -276,9 +276,10 @@ export type AnimeInfo = {
         languageV2: string;
         image: {
           large: string;
+          medium: string;
         };
       };
-    };
+    }[];
   };
   studios: Studios;
   reviewPreview: {

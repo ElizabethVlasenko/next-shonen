@@ -552,6 +552,7 @@ export const SEARCH_ANIME_BY_ID = gql`
             languageV2
             image {
               medium
+              large
             }
           }
         }
@@ -669,6 +670,48 @@ export const SEARCH_ANIME_BY_ID = gql`
         scoreDistribution {
           score
           amount
+        }
+      }
+    }
+  }
+`;
+
+// ("query media($id:Int,$page:Int){Media(id:$id){id characters(page:$page,sort:[ROLE,RELEVANCE,ID]){pageInfo{total perPage currentPage lastPage hasNextPage}edges{id role name voiceActorRoles(sort:[RELEVANCE,ID]){roleNotes dubGroup voiceActor{id name{userPreferred}language:languageV2 image{large}}}node{id name{userPreferred}image{large}}}}}}");
+
+export const GET_CHARACTER_BY_ANIME_ID = gql`
+  query Query($mediaId: Int, $page: Int = 1, $perPage: Int = 25) {
+    Page(page: $page, perPage: $perPage) {
+      pageInfo {
+        total
+        perPage
+        currentPage
+        lastPage
+        hasNextPage
+      }
+      media(id: $mediaId) {
+        characterPreview: characters(sort: [ROLE, RELEVANCE, ID]) {
+          edges {
+            id
+            role
+            name
+            voiceActors(sort: [RELEVANCE, ID]) {
+              name {
+                full
+              }
+              languageV2
+              image {
+                medium
+              }
+            }
+            node {
+              name {
+                full
+              }
+              image {
+                medium
+              }
+            }
+          }
         }
       }
     }
