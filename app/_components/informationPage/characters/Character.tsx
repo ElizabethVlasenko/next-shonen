@@ -1,10 +1,9 @@
 import Image from "next/image";
-import React from "react";
-import { stringToSentenceCase } from "../../../_lib/helpers/formatters/stringFormat";
 import {
   Character as CharacterType,
   voiceActor,
 } from "../../../_lib/graphql/types/anime";
+import { stringToSentenceCase } from "../../../_lib/helpers/formatters/stringFormat";
 
 type CharacterProps = {
   selectedLanguage: string;

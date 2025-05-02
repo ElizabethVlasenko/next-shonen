@@ -5,18 +5,38 @@ import { AnimeInfo } from "../../../_lib/graphql/types/anime";
 import ContentContainer from "../../ui/ContentContainer";
 import Character from "./Character";
 import Button from "../../ui/Button";
+import useInfiniteScroll from "../../../_lib/hooks/useInfiniteScroll";
+import { fetchCharacterTitleById } from "../../../_lib/graphql/fetchers/charactersFetcherById";
 
 type CharactersProps = {
   anime: AnimeInfo;
+  mediaId: string;
 };
 
 const CHARACTERS_SHORT_LIST_LENGTH = 6;
 
-export default function Characters({ anime }: CharactersProps) {
+export default function Characters({ anime, mediaId }: CharactersProps) {
+  const characterFetchFn = async (page: number) => {
+    const response = await fetchCharacterTitleById(mediaId, page);
+
+    console.log("response", response);
+    return response.Page.media?.characterPreview.edges;
+  };
+
+  const {
+    data: results,
+    loading,
+    observerRef,
+  } = useInfiniteScroll({
+    initialResults: anime.characterPreview.edges,
+    fetchFn: characterFetchFn,
+  });
+
+  console.log(results, loading, observerRef);
   //current selected language
   const [language, setLanguage] = useState<string>("Japanese");
   //list of all languages
-  const languages = anime.characterPreview.edges[0]?.voiceActors.reduce(
+  const languages = results[0]?.voiceActors.reduce(
     (arr: string[], character) =>
       arr.find((lan) => lan === character.languageV2)
         ? arr
@@ -47,7 +67,7 @@ export default function Characters({ anime }: CharactersProps) {
       </div>
 
       <ul className="grid grid-cols-2 gap-5">
-        {anime.characterPreview.edges
+        {results
           .slice(0, showAll ? numCharacters : CHARACTERS_SHORT_LIST_LENGTH)
           .map((character) => (
             <Character
@@ -56,6 +76,12 @@ export default function Characters({ anime }: CharactersProps) {
               selectedLanguage={language}
             />
           ))}
+        {showAll && loading && (
+          <div className="h-10 w-full text-center">
+            <p className="mt-8 text-center">Loading more...</p>
+          </div>
+        )}
+        {showAll && <div ref={observerRef} className="w-full" />}
       </ul>
       {numCharacters > CHARACTERS_SHORT_LIST_LENGTH && (
         <Button
